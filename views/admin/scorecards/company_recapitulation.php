@@ -8,6 +8,10 @@
                 <div class="panel_s">
                     <div class="panel-body">
                         <div class="row">
+                            <?php 
+                                $atd_this_month = isset($atd['this_month']['atd_duration']) ? $atd['this_month']['atd_duration'] : 0;
+                                $atd_alltime = isset($atd['alltime']['atd_duration']) ? $atd['alltime']['atd_duration'] : 0;
+                            ?>
                             <div class="quick-stats-projects col-xs-12 col-md-6 col-sm-6 col-lg-3">
                               <div class="top_stats_wrapper">
                                 <p class="text-uppercase mtop5">
@@ -16,7 +20,7 @@
                                 <div class="clearfix"></div>
                                 <div class="progress no-margin progress-bar-mini">
                                   <div class="progress-bar no-percent-text not-dynamic" style="background: rgb(3, 169, 244); width: 8.43%;" role="progressbar" aria-valuenow="8.43" aria-valuemin="0" aria-valuemax="100" data-percent="8.43"></div>
-                                </div> <span class="pull-right  mtop5"><?= $atd['this_month']['atd_duration'] . '/'. $atd['alltime']['atd_duration'] ?></span>
+                                </div> <span class="pull-right  mtop5"><?=  $atd_this_month . '/'. $atd_alltime ?></span>
                               </div>
                             </div>
 
