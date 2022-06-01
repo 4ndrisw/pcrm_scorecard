@@ -20,7 +20,7 @@
                                 <div class="clearfix"></div>
                                 <div class="progress no-margin progress-bar-mini">
                                   <div class="progress-bar no-percent-text not-dynamic" style="background: rgb(3, 169, 244); width: 8.43%;" role="progressbar" aria-valuenow="8.43" aria-valuemin="0" aria-valuemax="100" data-percent="8.43"></div>
-                                </div> <span class="pull-right  mtop5"><?=  $atd_this_month . '/'. $atd_alltime ?></span>
+                                </div><span class="pull-left  mtop5">M/A</span> <span class="pull-right  mtop5"><?=  $atd_this_month . '/'. $atd_alltime ?></span>
                               </div>
                             </div>
 
