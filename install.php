@@ -27,7 +27,7 @@ if (!$CI->db->table_exists(db_prefix() . 'scorecards_tasks_duration')) {
 
       `id` int(11) NOT NULL,
       `task_id` int(11) DEFAULT NULL,
-      `name` varchar(60) DEFAULT NULL,
+      `name` mediumtext DEFAULT NULL,
       `rel_id` int(11) DEFAULT NULL,
       `rel_type` varchar(20) DEFAULT NULL,
       `client_id` int(11) DEFAULT NULL,
