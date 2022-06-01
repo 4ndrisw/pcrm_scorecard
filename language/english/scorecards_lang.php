@@ -19,5 +19,6 @@ $lang['average_tasks_duration_by_staff'] 	='Average tasks duration by staff';
 $lang['maximum_tasks_duration_by_staff'] 	='Maximum tasks duration by staff';
 $lang['scorecards_task_duration']                          = 'Task duration';
 $lang['count_tasks_by_duration_per_staff'] 	='Count tasks by duration per staff';
+$lang['daily_completed_task_by_staff'] 	='Daily completed task by staff';
 
 

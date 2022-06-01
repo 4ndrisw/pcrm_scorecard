@@ -18,5 +18,6 @@ $lang['count']                          = 'Jumlah';
 $lang['average_tasks_duration_by_staff'] 	='Rata-rata durasi task oleh staff';
 $lang['maximum_tasks_duration_by_staff'] 	='Maximum durasi task oleh staff';
 $lang['count_tasks_by_duration_per_staff'] 	='Jumlah tasks per durasi oleh staff';
+$lang['daily_completed_task_by_staff'] 	='Tugas yg selesai harian oleh staff';
 
 $lang['scorecards_task_duration']                          = 'Durasi tugas';
