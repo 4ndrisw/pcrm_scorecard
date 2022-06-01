@@ -143,7 +143,7 @@ class Tasks_duration_model extends App_Model
         $this->db->select(['staff_id', 'firstname']);
         $this->db->select('DATE(`datefinished`) As date_finished',FALSE);
         $this->db->group_by(['date_finished','staff_id','firstname']); 
-        $this->db->order_by('datefinished', 'DESC'); 
+        $this->db->order_by('date_finished', 'DESC'); 
 
         //return $this->db->get_compiled_select(db_prefix() . 'scorecards_tasks_duration');
 
