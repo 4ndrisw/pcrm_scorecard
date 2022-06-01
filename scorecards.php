@@ -30,12 +30,14 @@ hooks()->add_filter('module_scorecards_action_links', 'module_scorecards_action_
 
 function scorecards_add_dashboard_widget($widgets)
 {
+    /*
     $widgets[] = [
         'path'      => 'scorecards/widgets/scorecard_this_week',
         'container' => 'left-8',
     ];
 
     return $widgets;
+    */
 }
 
 
