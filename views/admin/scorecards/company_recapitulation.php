@@ -38,8 +38,8 @@
                             <div class="count_tasks_by_duration col-md-6 col-sm-12">
                                 <?php $this->load->view('widgets/count_tasks_by_duration'); ?>                        
                             </div>
-                            <div class="daily_completed_task_by_staff col-md-6 col-sm-12">
-                                <?php //$this->load->view('widgets/daily_completed_task_by_staff'); ?>                        
+                            <div class="daily_completed_task col-md-6 col-sm-12">
+                                <?php $this->load->view('widgets/daily_completed_task'); ?>                        
                             </div>
                         </div>
                     </div>

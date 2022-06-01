@@ -51,13 +51,12 @@ class Company_recapitulation_model extends App_Model
 
     }
 
-    public function get_daily_completed_task_by_staff($staff_id = ''){
+    public function get_daily_task_completed(){
 
         $this->db->select('COUNT(`id`) As count_id',FALSE);
-        $this->db->select(['staff_id', 'firstname']);
-        $this->db->select('DATE(`datefinished`) As date_finished',FALSE);
-        $this->db->group_by(['date_finished','staff_id','firstname']); 
-        $this->db->order_by('date_finished', 'DESC'); 
+        $this->db->select('DATE(`datefinished`) As dtc_finished',FALSE);
+        $this->db->group_by(['dtc_finished']); 
+        $this->db->order_by('dtc_finished', 'DESC'); 
 
         //return $this->db->get_compiled_select(db_prefix() . 'scorecards_tasks_duration');
 
