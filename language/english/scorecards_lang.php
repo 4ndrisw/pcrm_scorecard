@@ -15,6 +15,7 @@ $lang['new_scorecard']                          = 'New scorecard';
 $lang['scorecards_task_recapitulation']                          = 'Recapitulation';
 $lang['days']                          = 'Days';
 $lang['count']                          = 'Count';
+$lang['date_finished']                          = 'Date finished';
 $lang['average_tasks_duration_by_staff'] 	='Average tasks duration by staff';
 $lang['maximum_tasks_duration_by_staff'] 	='Maximum tasks duration by staff';
 $lang['scorecards_task_duration']                          = 'Task duration';

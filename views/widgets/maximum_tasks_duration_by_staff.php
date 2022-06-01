@@ -5,7 +5,7 @@
     $scorecards = $CI->tasks_duration_model->get_maximum_tasks_duration_by_staff(get_staff_user_id());
 ?>
 
-<div class="widget" id="widget-<?php echo create_widget_id(); ?>" data-name="<?php echo _l('tasks_duration_by_staff'); ?>">
+<div class="widget" id="widget-<?php echo create_widget_id(); ?>" data-name="<?php echo _l('maximum_tasks_duration_by_staff'); ?>">
     <?php if(staff_can('view', 'scorecards') || staff_can('view_own', 'scorecards')) { ?>
     <div class="panel_s scorecards-expiring">
         <div class="panel-body padding-10">
