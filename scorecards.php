@@ -25,21 +25,22 @@ hooks()->add_action('staff_member_deleted', 'scorecards_staff_member_deleted');
 hooks()->add_action('after_scorecard_updated', 'scorecard_create_assigned_qrcode');
 
 hooks()->add_filter('migration_tables_to_replace_old_links', 'scorecards_migration_tables_to_replace_old_links');
-hooks()->add_filter('get_dashboard_widgets', 'scorecards_add_dashboard_widget');
+//hooks()->add_filter('get_dashboard_widgets', 'scorecards_add_dashboard_widget');
 hooks()->add_filter('module_scorecards_action_links', 'module_scorecards_action_links');
 
+/*
 function scorecards_add_dashboard_widget($widgets)
 {
-    /*
+    
     $widgets[] = [
         'path'      => 'scorecards/widgets/scorecard_this_week',
         'container' => 'left-8',
     ];
 
     return $widgets;
-    */
-}
 
+}
+*/
 
 function scorecards_staff_member_deleted($data)
 {
