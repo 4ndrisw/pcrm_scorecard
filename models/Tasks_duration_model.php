@@ -104,7 +104,7 @@ class Tasks_duration_model extends App_Model
 
         $this->db->select(['staff_id', 'firstname']);
         $this->db->select('AVG(`duration`) As avg_duration',FALSE);
-        $this->db->group_by('staff_id'); 
+        $this->db->group_by('staff_id', 'firstname'); 
         $this->db->order_by('avg_duration', 'DESC'); 
 
         $tasks = $this->db->get(db_prefix() . 'scorecards_tasks_duration')->result_array();
@@ -115,7 +115,7 @@ class Tasks_duration_model extends App_Model
 
         $this->db->select(['staff_id', 'firstname']);
         $this->db->select('MAX(`duration`) As max_duration',FALSE);
-        $this->db->group_by('staff_id'); 
+        $this->db->group_by('staff_id','firstname'); 
         $this->db->order_by('max_duration', 'DESC'); 
 
         $tasks = $this->db->get(db_prefix() . 'scorecards_tasks_duration')->result_array();
@@ -126,7 +126,7 @@ class Tasks_duration_model extends App_Model
 
         $this->db->select(['staff_id', 'firstname', 'duration']);
         $this->db->select('COUNT(`duration`) As count_duration',FALSE);
-        $this->db->group_by('duration','staff_id'); 
+        $this->db->group_by('duration','staff_id','firstname'); 
         $this->db->order_by('duration', 'DESC'); 
 
         //return $this->db->get_compiled_select(db_prefix() . 'scorecards_tasks_duration');
