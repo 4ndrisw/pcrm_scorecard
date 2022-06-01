@@ -16,5 +16,6 @@ $lang['scorecards_task_recapitulation']                          = 'Recapitulasi
 $lang['days']                          = 'Hari';
 $lang['average_tasks_duration_by_staff'] 	='Rata-rata durasi task oleh staff';
 $lang['maximum_tasks_duration_by_staff'] 	='Maximum durasi task oleh staff';
+$lang['count_tasks_by_duration_per_staff'] 	='Jumlah tasks per durasi oleh staff';
 
 $lang['scorecards_task_duration']                          = 'Durasi tugas';
