@@ -3,6 +3,7 @@
     $CI = &get_instance();
     $CI->load->model('scorecards/tasks_duration_model');
     $scorecards = $CI->tasks_duration_model->get_daily_completed_task_by_staff(get_staff_user_id());
+
 ?>
 
 <div class="widget" id="widget-<?php echo create_widget_id(); ?>" data-name="<?php echo _l('daily_completed_task_by_staff'); ?>">

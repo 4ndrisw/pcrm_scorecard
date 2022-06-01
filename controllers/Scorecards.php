@@ -51,6 +51,8 @@ class Scorecards extends AdminController
             access_denied('scorecards');
         }
         $data['atd']   = $this->company_recapitulation_model->get_average_tasks_duration();
+        //$data['atd']   = $this->company_recapitulation_model->get_average_tasks_duration();
+
         $data['mtd']   = $this->company_recapitulation_model->get_maximum_tasks_duration();
         $data['title']                 = _l('scorecards_company_recapitulation');
         //$this->load->view('widgets/tasks_duration_by_staff', $data);

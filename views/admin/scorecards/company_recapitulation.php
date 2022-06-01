@@ -7,7 +7,6 @@
             <div class="col-md-12">
                 <div class="panel_s">
                     <div class="panel-body">
-
                         <div class="row">
                             <div class="quick-stats-projects col-xs-12 col-md-6 col-sm-6 col-lg-3">
                               <div class="top_stats_wrapper">
@@ -17,7 +16,7 @@
                                 <div class="clearfix"></div>
                                 <div class="progress no-margin progress-bar-mini">
                                   <div class="progress-bar no-percent-text not-dynamic" style="background: rgb(3, 169, 244); width: 8.43%;" role="progressbar" aria-valuenow="8.43" aria-valuemin="0" aria-valuemax="100" data-percent="8.43"></div>
-                                </div> <span class="pull-right  mtop5"><?= '*/'. $atd[0]['atd_duration'] ?></span>
+                                </div> <span class="pull-right  mtop5"><?= $atd['this_month']['atd_duration'] . '/'. $atd['alltime']['atd_duration'] ?></span>
                               </div>
                             </div>
 
