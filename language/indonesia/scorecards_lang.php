@@ -14,6 +14,7 @@ $lang['settings_group_scorecards']                          = 'Settings group sc
 $lang['new_scorecard']                          = 'Buat Kartu skor';
 $lang['scorecards_task_recapitulation']                          = 'Recapitulasi';
 $lang['days']                          = 'Hari';
+$lang['count']                          = 'Jumlah';
 $lang['average_tasks_duration_by_staff'] 	='Rata-rata durasi task oleh staff';
 $lang['maximum_tasks_duration_by_staff'] 	='Maximum durasi task oleh staff';
 $lang['count_tasks_by_duration_per_staff'] 	='Jumlah tasks per durasi oleh staff';
