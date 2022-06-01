@@ -141,6 +141,15 @@ function scorecards_module_init_menu_items()
     }
     if (has_permission('scorecards', '', 'view')) {
     $CI->app_menu->add_sidebar_children_item('scorecards', [
+                'slug'     => 'scorecards-company-recapitulation',
+                'name'     => _l('scorecards_company_recapitulation'),
+                'icon'     => 'fa fa-hourglass',
+                'href'     => admin_url('scorecards/company_recapitulation'),
+                'position' => 10,
+        ]);
+    }
+    if (has_permission('scorecards', '', 'view')) {
+    $CI->app_menu->add_sidebar_children_item('scorecards', [
                 'slug'     => 'scorecards-task-duration',
                 'name'     => _l('scorecards_task_duration'),
                 'icon'     => 'fa fa-hourglass-half',

@@ -12,7 +12,8 @@ $lang['tasks_datefinished']                          = 'Completed';
 $lang['tasks_duration']                          = 'Duration';
 $lang['settings_group_scorecards']                          = 'Settings group scorecards';
 $lang['new_scorecard']                          = 'New scorecard';
-$lang['scorecards_task_recapitulation']                          = 'Recapitulation';
+$lang['scorecards_task_recapitulation']                          = 'Staff recap';
+$lang['scorecards_company_recapitulation']                          = 'Company recap';
 $lang['days']                          = 'Days';
 $lang['count']                          = 'Count';
 $lang['date_finished']                          = 'Date finished';
@@ -21,5 +22,7 @@ $lang['maximum_tasks_duration_by_staff'] 	='Maximum tasks duration by staff';
 $lang['scorecards_task_duration']                          = 'Task duration';
 $lang['count_tasks_by_duration_per_staff'] 	='Count tasks by duration per staff';
 $lang['daily_completed_task_by_staff'] 	='Daily completed task by staff';
-
+$lang['average_tasks_duration']                          = 'Average duration/task';
+$lang['maximum_tasks_duration']                          = 'Maximum duration/task';
+$lang['count_tasks_by_duration'] 	='Count tasks by duration';
 
