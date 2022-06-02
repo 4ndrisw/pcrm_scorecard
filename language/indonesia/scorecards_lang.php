@@ -26,3 +26,4 @@ $lang['scorecards_task_duration']                          = 'Durasi tugas';
 $lang['average_tasks_duration']                          = 'Rata rata durasi/tugas';
 $lang['maximum_tasks_duration']                          = 'Maksimum durasi/tugas';
 $lang['count_tasks_by_duration'] 	='Jumlah tasks per durasi';
+$lang['scorecards_task_import'] 	='Import';

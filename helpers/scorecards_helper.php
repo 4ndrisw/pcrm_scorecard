@@ -716,3 +716,71 @@ function scorecard_status_changed_hook($data){
     log_activity('scorecard_status_changed');
 
 }
+
+//  215:      hooks()->do_action('after_add_task', $task_id);
+//  301:      hooks()->do_action('after_add_task', $insert_id);
+// 1574:      hooks()->do_action('task_status_changed', ['status' => $status, 'task_id' => $task_id]);
+
+
+function scorecards_task_status_changed($data) {
+
+    log_activity(json_encode($data));
+    $CI = &get_instance();
+    $CI->load->model('tasks_model');
+
+    $task = $CI->tasks_model->get($data['task_id']);
+
+    if($task->rel_type !== 'project'){
+        return;
+    }
+    $params = [];
+
+
+    $params['task_id'] = $task->id;    
+    $params['name'] = $task->name;
+    $params['rel_id'] = $task->rel_id;
+    $params['rel_type'] = $task->rel_type;
+    $params['clientid'] = $task->project_data->clientid;
+    $params['company'] = $task->project_data->client_data->company;
+
+    $params['dateadded'] = $task->dateadded;
+    $params['datefinished'] = $task->datefinished;
+    
+    $date1 = new DateTime($task->startdate);
+    $date2 = new DateTime($task->datefinished);
+
+    $params['duration'] = NULL;
+    if(isset($task->datefinished)){
+        $interval = $date1->diff($date2);
+        $params['duration'] = $interval->d;
+    }
+    $params['staffid'] = $task->assignees[0]['assigneeid'];
+    $params['firstname'] = $task->assignees[0]['firstname'];
+    $params['lastname'] = $task->assignees[0]['lastname'];
+    
+
+    log_activity(json_encode($params));
+    /*
+
+
+
+    $CI = &get_instance();
+    $this->load->model('tasks_model');
+
+    $task = $CI->tasks_model->get($data['task_id']);
+
+    log_activity(json_encode($task));
+
+    switch ($data['status']) {
+        case '5':
+            // complete
+
+
+            break;
+        
+        default:
+            // code...
+            break;
+    }
+    */
+}

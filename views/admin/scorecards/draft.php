@@ -4,8 +4,18 @@
     <div class="content">
         <div class="row">
             <div class="col-md-12">
+
                 <div class="panel_s">
                     <div class="panel-body">
+
+
+                        <?php 
+                            echo form_open($this->uri->uri_string(), array('class'=>'pull-right mtop7 action-button'));
+                            echo form_hidden('scorecards_action', 4);
+                            echo '<button type="submit" data-loading-text="'._l('wait_text').'" autocomplete="off" class="btn btn-success action-button accept"><i class="fa fa-check"></i> '._l('clients_accept_schedule').'</button>';
+                            echo form_close();
+                        ?>
+                        <div class="clearfix"></div>
                         <?php 
 /*
                             $records = [];

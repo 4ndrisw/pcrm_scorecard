@@ -32,6 +32,40 @@ class Scorecards extends AdminController
     }
 
     /* Get all scorecards in case user go on index page */
+    public function task_import($id = '')
+    {
+        if (!has_permission('scorecards', '', 'view')) {
+            access_denied('scorecards');
+        }
+        if ($this->input->is_ajax_request()) {
+            $this->app->get_table_data(module_views_path('scorecards', 'admin/tables/table_import'));
+        }
+
+        if ($this->input->post('scorecards_action')) {
+            $action = $this->input->post('scorecards_action');
+            /*
+             * TODO some actions
+             */
+            $data = $this->tasks_duration_model->get_importable_tasks();
+            if(!empty($data)){
+                if($this->db->insert_batch(db_prefix() . 'scorecards_tasks_duration',$data)){
+                    log_activity('Import scorecard data has successfully');
+                }
+                else{
+                    log_activity('Import scorecard data has failed');
+                }
+            }
+        }
+
+        $data = [];
+        $data['tasks'] = $this->tasks_duration_model->get_importable_tasks();
+        $data['inspectionid']            = $id;
+        $data['title']                 = _l('scorecards_tracking');
+        $this->load->view('admin/scorecards/table_import', $data);
+        //$this->load->view('admin/scorecards/draft', $data);
+    }
+
+    /* Get all scorecards in case user go on index page */
     public function task_recapitulation($id = '')
     {
         if (!has_permission('scorecards', '', 'view')) {

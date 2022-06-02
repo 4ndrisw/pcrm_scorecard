@@ -26,4 +26,4 @@ $lang['daily_completed_task'] 	='Daily completed task';
 $lang['average_tasks_duration']                          = 'Average duration/task';
 $lang['maximum_tasks_duration']                          = 'Maximum duration/task';
 $lang['count_tasks_by_duration'] 	='Count tasks by duration';
-
+$lang['scorecards_task_import'] 	='Import';
