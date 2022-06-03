@@ -27,3 +27,21 @@ $lang['average_tasks_duration']                          = 'Average duration/tas
 $lang['maximum_tasks_duration']                          = 'Maximum duration/task';
 $lang['count_tasks_by_duration'] 	='Count tasks by duration';
 $lang['scorecards_task_import'] 	='Import';
+
+$lang['task_duration_dateadded'] 	='Started';
+$lang['task_duration_datefinished'] 	='finished';
+$lang['task_duration_duration'] 	='Duration';
+$lang['task_duration_staff_id'] 	='Staff';
+$lang['task_duration_client_company'] 	='Company';
+$lang['task_duration_project_name'] 	='Project';
+$lang['task_duration_lowercase'] 	='Task duration';
+$lang['related_to_task'] 	='Task duration';
+$lang['task_duration_preview'] 	='Task duration preview';
+$lang['edit_task_duration_tooltip'] 	='Edit';
+$lang['task_duration'] 	='Task duration';
+
+
+
+
+
+

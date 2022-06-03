@@ -30,11 +30,11 @@ if (!$CI->db->table_exists(db_prefix() . 'scorecards_tasks_duration')) {
       `name` mediumtext DEFAULT NULL,
       `rel_id` int(11) DEFAULT NULL,
       `rel_type` varchar(20) DEFAULT NULL,
-      `client_id` int(11) DEFAULT NULL,
+      `clientid` int(11) DEFAULT NULL,
       `dateadded` datetime DEFAULT NULL,
       `datefinished` datetime DEFAULT NULL,
       `duration` smallint(3) DEFAULT NULL,
-      `staff_id` int(1) DEFAULT NULL,
+      `staffid` int(1) DEFAULT NULL,
       `firstname` varchar(30) DEFAULT NULL,
       `lastname` varchar(30) DEFAULT NULL
 

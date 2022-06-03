@@ -13,7 +13,7 @@ class Tasks_duration_model extends App_Model
 
         $this->load->model('tasks_model');
         $this->load->model('projects_model');
-        $this->load->model('staff_model');
+        $this->load->model('tasks_history_model');
     }
 
     /**
@@ -28,33 +28,33 @@ class Tasks_duration_model extends App_Model
             $this->db->where('id', $id);
         }
         $this->db->where($where);
-        $this->db->limit(3, 0);
-        $task = $this->db->get(db_prefix() . 'tasks')->row();
+        $task_duration = $this->db->get(db_prefix() . 'scorecards_tasks_duration')->row();
 
 
         //$task = $this->db->get_compiled_select('tasks');
         //return $task;
+        
+        if ($task_duration) {
+            $task_duration->task     = $this->tasks_model->get($id);
+            $task_duration->assignees     = $this->tasks_model->get_task_assignees($id);
+            $task_duration->assignees_ids = [];
 
-        if ($task) {
-            $task->assignees     = $this->tasks_model->get_task_assignees($id);
-            $task->assignees_ids = [];
-
-            foreach ($task->assignees as $follower) {
-                array_push($task->assignees_ids, $follower['assigneeid']);
-            }
 
             if (is_staff_logged_in()) {
-                $task->current_user_is_assigned = $this->tasks_model->is_task_assignee(get_staff_user_id(), $id);
-                $task->current_user_is_creator  = $this->tasks_model->is_task_creator(get_staff_user_id(), $id);
+                $task_duration->current_user_is_assigned = $this->tasks_model->is_task_assignee(get_staff_user_id(), $id);
+                $task_duration->current_user_is_creator  = $this->tasks_model->is_task_creator(get_staff_user_id(), $id);
             }
 
-            if ($task->rel_type == 'project') {
-                $task->project_data = $this->projects_model->get($task->rel_id);
+            if ($task_duration->rel_type == 'project') {
+                $task_duration->project_data = $this->projects_model->get($task_duration->rel_id);
             }
+            $task_duration->task_history_data = $this->tasks_history_model->get_history_by_task_id('343');
+
         }
+        
 
-        //return hooks()->apply_filters('get_task', $task);
-        return $task;
+        //return hooks()->apply_filters('get_task_durations', $task_durations);
+        return $task_duration;
     }
 
     public function get_billable_tasks($customer_id = false, $project_id = '')
@@ -118,14 +118,14 @@ class Tasks_duration_model extends App_Model
                            db_prefix() . 'staff.lastname',
                        ]);
 
-        $this->db->join(db_prefix() . 'scorecards_tasks_duration',db_prefix() . 'scorecards_tasks_duration.task_id = ' . db_prefix() . 'tasks.id','left');
+        $this->db->join(db_prefix() . 'scorecards_task_duration',db_prefix() . 'scorecards_task_duration.task_id = ' . db_prefix() . 'tasks.id','left');
         $this->db->join(db_prefix() . 'task_assigned',db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'tasks.id','left');
         $this->db->join(db_prefix() . 'staff',db_prefix() . 'staff.staffid = ' . db_prefix() . 'task_assigned.staffid','left');
         $this->db->join(db_prefix() . 'projects',db_prefix() . 'projects.id = ' . db_prefix() . 'tasks.rel_id','left');
         
         $this->db->where(db_prefix() . 'tasks.datefinished !=', NULL, true);
-        $this->db->where(db_prefix() . 'scorecards_tasks_duration.task_id =', NULL, true);
-        $this->db->where(db_prefix() . 'scorecards_tasks_duration.rel_id =', NULL, true);
+        $this->db->where(db_prefix() . 'scorecards_task_duration.task_id =', NULL, true);
+        $this->db->where(db_prefix() . 'scorecards_task_duration.rel_id =', NULL, true);
         $this->db->where(db_prefix() .'tasks.rel_id IS NOT NULL');
         $this->db->where(db_prefix() .'tasks.rel_type ="project"');
         
@@ -136,25 +136,25 @@ class Tasks_duration_model extends App_Model
         return $tasks;
     }
 
-    public function get_average_tasks_duration_by_staff($staffid = ''){
+    public function get_average_task_duration_by_staff($staffid = ''){
 
         $this->db->select(['staffid', 'firstname']);
         $this->db->select('AVG(`duration`) As avg_duration',FALSE);
         $this->db->group_by(['staffid', 'firstname']); 
         $this->db->order_by('avg_duration', 'DESC'); 
 
-        $tasks = $this->db->get(db_prefix() . 'scorecards_tasks_duration')->result_array();
+        $tasks = $this->db->get(db_prefix() . 'scorecards_task_duration')->result_array();
         return $tasks;
 
     }
-    public function get_maximum_tasks_duration_by_staff($staffid = ''){
+    public function get_maximum_task_duration_by_staff($staffid = ''){
 
         $this->db->select(['staffid', 'firstname']);
         $this->db->select('MAX(`duration`) As max_duration',FALSE);
         $this->db->group_by(['staffid', 'firstname']); 
         $this->db->order_by('max_duration', 'DESC'); 
 
-        $tasks = $this->db->get(db_prefix() . 'scorecards_tasks_duration')->result_array();
+        $tasks = $this->db->get(db_prefix() . 'scorecards_task_duration')->result_array();
         return $tasks;
 
     }
@@ -166,9 +166,9 @@ class Tasks_duration_model extends App_Model
         $this->db->group_by(['duration','staffid','firstname']); 
         $this->db->order_by('duration', 'DESC'); 
 
-        //return $this->db->get_compiled_select(db_prefix() . 'scorecards_tasks_duration');
+        //return $this->db->get_compiled_select(db_prefix() . 'scorecards_task_duration');
 
-        $tasks = $this->db->get(db_prefix() . 'scorecards_tasks_duration')->result_array();
+        $tasks = $this->db->get(db_prefix() . 'scorecards_task_duration')->result_array();
         return $tasks;
 
     }
@@ -181,9 +181,9 @@ class Tasks_duration_model extends App_Model
         $this->db->group_by(['date_finished','staffid','firstname']); 
         $this->db->order_by('date_finished', 'DESC'); 
 
-        //return $this->db->get_compiled_select(db_prefix() . 'scorecards_tasks_duration');
+        //return $this->db->get_compiled_select(db_prefix() . 'scorecards_task_duration');
 
-        $tasks = $this->db->get(db_prefix() . 'scorecards_tasks_duration')->result_array();
+        $tasks = $this->db->get(db_prefix() . 'scorecards_task_duration')->result_array();
         return $tasks;
 
     }

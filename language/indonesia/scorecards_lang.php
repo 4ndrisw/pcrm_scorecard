@@ -14,7 +14,7 @@ $lang['settings_group_scorecards']                          = 'Settings group sc
 $lang['new_scorecard']                          = 'Buat Kartu skor';
 $lang['scorecards_task_recapitulation']                          = 'Staf rekap';
 $lang['scorecards_company_recapitulation']                          = 'Persh rekap';
-$lang['days']                          = 'Days';$lang['days']                          = 'Hari';
+$lang['days']                          = 'Hari';
 $lang['count']                          = 'Jumlah';
 $lang['date_finished']                          = 'Selesai';
 $lang['average_tasks_duration_by_staff'] 	='Rata-rata durasi task oleh staff';
@@ -27,3 +27,10 @@ $lang['average_tasks_duration']                          = 'Rata rata durasi/tug
 $lang['maximum_tasks_duration']                          = 'Maksimum durasi/tugas';
 $lang['count_tasks_by_duration'] 	='Jumlah tasks per durasi';
 $lang['scorecards_task_import'] 	='Import';
+
+$lang['task_duration_dateadded'] 	='Mulai';
+$lang['task_duration_datefinished'] 	='Selesai';
+$lang['task_duration_duration'] 	='Durasi';
+$lang['task_duration_staff_id'] 	='Staf';
+$lang['task_duration_client_company'] 	='Pelanggan';
+$lang['task_duration_project_name'] 	='Proyek';

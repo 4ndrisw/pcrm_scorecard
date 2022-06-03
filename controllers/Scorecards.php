@@ -19,16 +19,31 @@ class Scorecards extends AdminController
         if (!has_permission('scorecards', '', 'view')) {
             access_denied('scorecards');
         }
-        if ($this->input->is_ajax_request()) {
-            $this->app->get_table_data(module_views_path('scorecards', 'admin/tables/table'));
+
+   
+        if(is_numeric($id)){
+            $task_duration = $this->tasks_duration_model->get($id);
+            if(empty($task_duration)) goto end;
+
+            $data['task_duration'] = $task_duration;
+            $data['task_duration_id']            = $id;
+            $data['title']                 = _l('task_duration_preview');
+            $this->load->view('admin/tasks_duration/task_duration_preview', $data);
+
         }
-        $data = [];
-        //$where = ['datefinished'=>'IS NOT NULL']
-        $data['tasks'] = $this->tasks_duration_model->get_billable_tasks();
-        $data['inspectionid']            = $id;
-        $data['title']                 = _l('scorecards_tracking');
-        $this->load->view('admin/scorecards/manage', $data);
-        //$this->load->view('admin/scorecards/draft', $data);
+        else{
+            end:
+            if ($this->input->is_ajax_request()) {
+                $this->app->get_table_data(module_views_path('scorecards', 'admin/tables/table'));
+            }
+            $data = [];
+            //$where = ['datefinished'=>'IS NOT NULL']
+            $data['tasks'] = $this->tasks_duration_model->get_billable_tasks();
+            $data['inspectionid']            = $id;
+            $data['title']                 = _l('scorecards_tracking');
+            $this->load->view('admin/tasks_duration/manage', $data);
+            //$this->load->view('admin/scorecards/draft', $data);
+        }
     }
 
     /* Get all scorecards in case user go on index page */

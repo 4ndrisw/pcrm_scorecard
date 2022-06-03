@@ -722,8 +722,31 @@ function scorecard_status_changed_hook($data){
 // 1574:      hooks()->do_action('task_status_changed', ['status' => $status, 'task_id' => $task_id]);
 
 
-function scorecards_task_status_changed($data) {
+function scorecards_task_status_changed($param) {
 
+    $data = [];
+    $CI = &get_instance();
+    $data['key_id'] = $param['task_id'].'-'.$param['status'];
+    $data['task_id'] = $param['task_id'];
+    $data['status'] = $param['status'];
+
+    $CI->db->where('key_id', $data['key_id']);
+    $q = $CI->db->get(db_prefix() . 'scorecards_tasks_history');
+    $CI->db->reset_query();
+        
+    if ( $q->num_rows() > 0 ) 
+    {
+        //$this->db->where('id', $id);
+        //$this->db->update('your_table_name', $data);
+        $CI->db->where('key_id', $data['key_id'])->update(db_prefix() . 'scorecards_tasks_history', $data);
+    } else {
+        //$this->db->set('id', $id);
+        //$this->db->insert('your_table_name', $data);
+        $CI->db->set('key_id', $data['key_id'])->insert(db_prefix() . 'scorecards_tasks_history', $data);
+    }
+
+
+    return;
     log_activity(json_encode($data));
     $CI = &get_instance();
     $CI->load->model('tasks_model');
@@ -783,4 +806,24 @@ function scorecards_task_status_changed($data) {
             break;
     }
     */
+}
+
+
+/**
+ * Format task_duration status
+ * @param  integer  $status
+ * @param  string  $classes additional classes
+ * @param  boolean $label   To include in html label or not
+ * @return mixed
+ */
+function format_task_duration_status($status, $classes = '', $label = true)
+{
+    $id          = $status;
+    $label_class = task_duration_status_color_class($status);
+    $status      = task_duration_status_by_id($status);
+    if ($label == true) {
+        return '<span class="label label-' . $label_class . ' ' . $classes . ' s-status task_duration-status-' . $id . ' task_duration-status-' . $label_class . '">' . $status . '</span>';
+    }
+
+    return $status;
 }
