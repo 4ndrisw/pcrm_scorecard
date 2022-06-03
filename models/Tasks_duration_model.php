@@ -118,14 +118,14 @@ class Tasks_duration_model extends App_Model
                            db_prefix() . 'staff.lastname',
                        ]);
 
-        $this->db->join(db_prefix() . 'scorecards_task_duration',db_prefix() . 'scorecards_task_duration.task_id = ' . db_prefix() . 'tasks.id','left');
+        $this->db->join(db_prefix() . 'scorecards_tasks_duration',db_prefix() . 'scorecards_tasks_duration.task_id = ' . db_prefix() . 'tasks.id','left');
         $this->db->join(db_prefix() . 'task_assigned',db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'tasks.id','left');
         $this->db->join(db_prefix() . 'staff',db_prefix() . 'staff.staffid = ' . db_prefix() . 'task_assigned.staffid','left');
         $this->db->join(db_prefix() . 'projects',db_prefix() . 'projects.id = ' . db_prefix() . 'tasks.rel_id','left');
         
         $this->db->where(db_prefix() . 'tasks.datefinished !=', NULL, true);
-        $this->db->where(db_prefix() . 'scorecards_task_duration.task_id =', NULL, true);
-        $this->db->where(db_prefix() . 'scorecards_task_duration.rel_id =', NULL, true);
+        $this->db->where(db_prefix() . 'scorecards_tasks_duration.task_id =', NULL, true);
+        $this->db->where(db_prefix() . 'scorecards_tasks_duration.rel_id =', NULL, true);
         $this->db->where(db_prefix() .'tasks.rel_id IS NOT NULL');
         $this->db->where(db_prefix() .'tasks.rel_type ="project"');
         
