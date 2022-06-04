@@ -8,7 +8,7 @@
 		        	if ($this->input->is_ajax_request()) {
 		            $this->app->get_table_data(module_views_path('scorecards', 'admin/tables/small_table'));
 		        	}
-					//$this->load->view('admin/tasks_duration/task_duration_small_table'); 
+					$this->load->view('admin/tasks_duration/task_duration_small_table'); 
 				?>
 			</div>
 			<div class="col-md-6 no-padding task_duration-preview">

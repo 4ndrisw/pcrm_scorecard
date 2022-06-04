@@ -22,8 +22,12 @@ class Scorecards extends AdminController
 
    
         if(is_numeric($id)){
+            if ($this->input->is_ajax_request()) {
+                $this->app->get_table_data(module_views_path('scorecards', 'admin/tables/table'));
+            }
+
             $task_duration = $this->tasks_duration_model->get($id);
-            if(empty($task_duration)) goto end;
+            //if(empty($task_duration)) goto end;
 
             $data['task_duration'] = $task_duration;
             $data['task_duration_id']            = $id;
@@ -32,7 +36,7 @@ class Scorecards extends AdminController
 
         }
         else{
-            end:
+            //end:
             if ($this->input->is_ajax_request()) {
                 $this->app->get_table_data(module_views_path('scorecards', 'admin/tables/table'));
             }
