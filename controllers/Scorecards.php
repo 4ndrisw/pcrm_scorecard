@@ -20,10 +20,11 @@ class Scorecards extends AdminController
             access_denied('scorecards');
         }
 
+
    
         if(is_numeric($id)){
             if ($this->input->is_ajax_request()) {
-                $this->app->get_table_data(module_views_path('scorecards', 'admin/tables/table'));
+                $this->app->get_table_data(module_views_path('scorecards', 'admin/tables/small_table'));
             }
 
             $task_duration = $this->tasks_duration_model->get($id);
@@ -32,7 +33,32 @@ class Scorecards extends AdminController
             $data['task_duration'] = $task_duration;
             $data['task_duration_id']            = $id;
             $data['title']                 = _l('task_duration_preview');
+            
+
+            $data['members']  = $this->staff_model->get();
+            $data['years']    = $this->tasks_model->get_distinct_tasks_years(($this->input->post('month_from') ? $this->input->post('month_from') : 'startdate'));
+            
+
+            $has_permission_create = has_permission('tasks', '', 'create');
+            $has_permission_view   = has_permission('tasks', '', 'view');
+
+            if (!$has_permission_view) {
+                $staff_id = get_staff_user_id();
+            } elseif ($this->input->post('member')) {
+                $staff_id = $this->input->post('member');
+            } else {
+                $staff_id = '';
+            }
+            $data['staff_id'] = $staff_id;
+
+
+            $input_post = $this->input->post();
+
+            $this->session->set_userdata('task_duration_filter', $input_post);
+            
             $this->load->view('admin/tasks_duration/task_duration_preview', $data);
+            
+            //$this->load->view('admin/scorecards/draft', $data);
 
         }
         else{

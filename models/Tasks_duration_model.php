@@ -30,12 +30,9 @@ class Tasks_duration_model extends App_Model
         $this->db->where($where);
         $task_duration = $this->db->get(db_prefix() . 'scorecards_tasks_duration')->row();
 
-
-        //$task = $this->db->get_compiled_select('tasks');
-        //return $task;
-        
+    
         if ($task_duration) {
-            $task_duration->task     = $this->tasks_model->get($id);
+            $task_duration->task     = $this->tasks_model->get($task_duration->task_id);
             $task_duration->assignees     = $this->tasks_model->get_task_assignees($id);
             $task_duration->assignees_ids = [];
 
@@ -48,7 +45,7 @@ class Tasks_duration_model extends App_Model
             if ($task_duration->rel_type == 'project') {
                 $task_duration->project_data = $this->projects_model->get($task_duration->rel_id);
             }
-            $task_duration->task_history_data = $this->tasks_history_model->get_history_by_task_id('343');
+            $task_duration->task_history_data = $this->tasks_history_model->get_history_by_task_id($task_duration->task_id);
 
         }
         
