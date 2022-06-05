@@ -49,7 +49,7 @@ $additionalColumns = hooks()->apply_filters('scorecards_table_additional_columns
     db_prefix() . 'staff.lastname',
 ]);
 
-$sGroupBy = ' GROUP BY ' .db_prefix() . 'tasks.name, ' .db_prefix() . 'projects.name, '. db_prefix() . 'staff.firstname';
+$sGroupBy = ' GROUP BY ' .db_prefix() . 'tasks.id, ' .db_prefix() . 'tasks.name, ' .db_prefix() . 'projects.name, '. db_prefix() . 'staff.firstname' ;
 
 $result = data_tables_init($aColumns, $sIndexColumn, $sTable, $join, $where, $additionalColumns, $sGroupBy);
 
