@@ -39,6 +39,18 @@ $lang['related_to_task'] 	='Task duration';
 $lang['task_duration_preview'] 	='Task duration preview';
 $lang['edit_task_duration_tooltip'] 	='Edit';
 $lang['task_duration'] 	='Task duration';
+$lang['scorecards_task_history'] 	='Task history';
+
+$lang['task_history_preview'] 	='Task history preview';
+$lang['task_history_lowercase'] 	='Task history';
+$lang['task_history'] 	='Task history';
+$lang['task_history_dateadded'] 	='Date start';
+$lang['task_history_datefinished'] 	='Date finished';
+$lang['task_history_staff_id'] 	='Staff';
+$lang['task_history_client_company'] 	='Company';
+$lang['task_history_project_name'] 	='Project';
+$lang['tasks_history_tracking'] 	='Task history';
+
 
 
 

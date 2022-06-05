@@ -6,6 +6,13 @@
             <div class="col-md-12">                
                 <div class="panel_s">
                    <div class="panel-body">
+                      <?php if(!$this->input->get('project_id')){ ?>
+                      <a href="<?php echo admin_url('scorecards/task_history'); ?>" class="btn btn-default pull-left"><?php echo _l('back_to_tasks_list'); ?></a>
+                      <?php } else { ?>
+                      <a href="<?php echo admin_url('projects/view/'.$this->input->get('project_id').'?group=project_tasks'); ?>" class="mtop5 pull-left btn btn-default"><?php echo _l('back_to_project'); ?></a>
+                      <?php } ?>
+                      <div class="clearfix"></div>
+                      <hr />
                       <?php echo form_open($this->uri->uri_string() . ($this->input->get('project_id') ? '?project_id='.$this->input->get('project_id') : '')); ?>
                       <div class="row">
                          <?php echo form_hidden('project_id',$this->input->get('project_id')); ?>
@@ -57,16 +64,12 @@
                    </div>
                 </div>
                 <div class="panel_s">
-                    <div class="panel-body">
-                    <?php render_datatable(array(
-                        _l('tasks_name'),
-                        _l('projects_name'),
-                        _l('staff_task_name'),
-                        _l('tasks_dateadded'),
-                        _l('tasks_datefinished'),
-                        _l('tasks_duration'),
-                        ),'scorecards'); ?>
-                    </div>
+                     <div class="col-md-6 no-padding">
+                        <?php $this->load->view('admin/tasks_history/task_history_small_table'); ?>
+                     </div>
+                     <div class="col-md-6 no-padding task_duration-preview">
+                        <?php $this->load->view('admin/tasks_history/task_history_preview_template'); ?>
+                     </div>
                 </div>
             </div>
         </div>

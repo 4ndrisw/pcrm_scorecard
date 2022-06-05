@@ -34,3 +34,5 @@ $lang['task_duration_duration'] 	='Durasi';
 $lang['task_duration_staff_id'] 	='Staf';
 $lang['task_duration_client_company'] 	='Pelanggan';
 $lang['task_duration_project_name'] 	='Proyek';
+$lang['scorecards_task_history'] 	='Riwayat tugas';
+$lang['tasks_history_tracking'] 	='Task history';

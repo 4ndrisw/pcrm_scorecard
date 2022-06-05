@@ -159,6 +159,15 @@ function scorecards_module_init_menu_items()
                 'position' => 11,
         ]);
     }
+    if (has_permission('scorecards', '', 'view')) {
+    $CI->app_menu->add_sidebar_children_item('scorecards', [
+                'slug'     => 'scorecards-task-history',
+                'name'     => _l('scorecards_task_history'),
+                'icon'     => 'fa fa-hourglass-half',
+                'href'     => admin_url('scorecards/task_history'),
+                'position' => 11,
+        ]);
+    }
     if (has_permission('scorecards', '', 'create')) {
     $CI->app_menu->add_sidebar_children_item('scorecards', [
                 'slug'     => 'scorecards-task-import',

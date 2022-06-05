@@ -87,6 +87,80 @@ class Scorecards extends AdminController
         }
     }
 
+
+    /* Get all scorecards in case user go on index page */
+    public function task_history($task_id = '')
+    {
+        if (!has_permission('scorecards', '', 'view')) {
+            access_denied('scorecards');
+        }
+        $data = [];
+
+        $data['members']  = $this->staff_model->get();
+        $data['years']    = $this->tasks_model->get_distinct_tasks_years(($this->input->post('month_from') ? $this->input->post('month_from') : 'startdate'));
+        
+        $has_permission_create = has_permission('tasks', '', 'create');
+        $has_permission_view   = has_permission('tasks', '', 'view');
+        
+        if (!$has_permission_view) {
+            $staff_id = get_staff_user_id();
+        } elseif ($this->input->post('member')) {
+            $staff_id = $this->input->post('member');
+        } else {
+            $staff_id = '';
+        }
+
+        $task_history_filter = $this->session->userdata('task_history_filter');
+
+        if(isset($task_history_filter['member'])){
+            $staff_id = $task_history_filter['member'];
+        }
+        
+        $data['staff_id'] = $staff_id;
+
+        if(!is_null($this->input->post('member')) && ($staff_id != $this->input->post('member'))){
+            $data['staff_id'] = $this->input->post('member');
+            $task_history_filter['member'] = $this->input->post('member');
+        }
+
+        $data['month'] = isset($task_history_filter['month']) ? $task_history_filter['month'] : date('m');
+        if(!is_null($this->input->post('month')) && ($data['month'] != $this->input->post('month'))){
+            $data['month'] = $this->input->post('month');
+            $task_history_filter['month'] = $this->input->post('month');
+        }
+
+        $this->session->set_userdata('task_history_filter', $task_history_filter);
+
+        if(is_numeric($task_id)){
+            if ($this->input->is_ajax_request()) {
+                $this->app->get_table_data(module_views_path('scorecards', 'admin/tables/task_history__small_table'));
+            }
+
+            $task_history = $this->tasks_history_model->get_history_by_task_id($task_id);
+            $task = $this->tasks_model->get($task_id);
+            //if(empty($task_history)) goto end;
+
+            $data['task'] = $task;
+            $data['task_history'] = $task_history;
+            $data['task_history_task_id']            = $task_id;
+            $data['title']                 = _l('task_history_preview');
+
+            $this->load->view('admin/tasks_history/task_history_preview', $data);
+            
+        }
+        else{
+            //end:
+            if ($this->input->is_ajax_request()) {
+                $this->app->get_table_data(module_views_path('scorecards', 'admin/tables/task_history__table'));
+            }
+            
+            $data['title']                 = _l('tasks_history_tracking');
+                
+            $this->load->view('admin/tasks_history/manage', $data);
+            //$this->load->view('admin/scorecards/draft', $data);
+        }
+    }
+
     /* Get all scorecards in case user go on index page */
     public function task_import($id = '')
     {
