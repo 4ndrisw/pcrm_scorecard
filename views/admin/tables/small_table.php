@@ -34,7 +34,8 @@ if($this->ci->session->has_userdata('task_duration_filter')){
     $staff_id = isset($task_duration_filter['member']) ? $task_duration_filter['member'] : '';
     $month = isset($task_duration_filter['month']) ? $task_duration_filter['month'] : date('m');
 }
-log_activity(json_encode($task_duration_filter));
+
+log_activity('_task_duration_filter_ ' . json_encode($task_duration_filter));
 
 if(is_numeric($staff_id)){
     array_push($where, 'AND ' . db_prefix() . 'scorecards_tasks_duration.staff_id =' . $staff_id);

@@ -30,8 +30,6 @@ class Scorecards extends AdminController
         
         $task_duration_filter = $this->session->userdata('task_duration_filter');
 
-        log_activity('1' . json_encode($task_duration_filter));
-        
         if (!$has_permission_view) {
             $staff_id = get_staff_user_id();
         } elseif ($this->input->post('member')) {
@@ -39,8 +37,12 @@ class Scorecards extends AdminController
         } else {
             $staff_id = '';
         }
-        $data['staff_id'] = isset($task_duration_filter['member']) ? $task_duration_filter['member'] : $staff_id;
-   
+
+        if(isset($task_duration_filter['member'])){
+            $staff_id = $task_duration_filter['member'];
+        }
+        
+        $data['staff_id'] = $staff_id;   
         if(is_numeric($id)){
             if ($this->input->is_ajax_request()) {
                 $this->app->get_table_data(module_views_path('scorecards', 'admin/tables/small_table'));
@@ -49,7 +51,7 @@ class Scorecards extends AdminController
             $task_duration = $this->tasks_duration_model->get($id);
             //if(empty($task_duration)) goto end;
 
-            if(!is_null($this->input->post('member')) && ($data['staff_id'] != $this->input->post('member'))){
+            if(!is_null($this->input->post('member')) && ($task_duration_filter['member'] != $this->input->post('member'))){
                 $data['staff_id'] = $this->input->post('member');
                 $task_duration_filter['member'] = $this->input->post('member');
             }
@@ -74,13 +76,25 @@ class Scorecards extends AdminController
             if ($this->input->is_ajax_request()) {
                 $this->app->get_table_data(module_views_path('scorecards', 'admin/tables/table'));
             }
-            //$where = ['datefinished'=>'IS NOT NULL']
             $data['tasks'] = $this->tasks_duration_model->get_billable_tasks();
             
             $data['title']                 = _l('scorecards_tracking');
             
-            $input_post = $this->input->post();
-            $this->session->set_userdata('task_duration_filter', $input_post);
+
+            $task_duration = $this->tasks_duration_model->get($id);
+    
+            if(!is_null($this->input->post('member')) && ($task_duration_filter['member'] != $this->input->post('member'))){
+                $data['staff_id'] = $this->input->post('member');
+                $task_duration_filter['member'] = $this->input->post('member');
+            }
+
+            $data['month'] = isset($task_duration_filter['month']) ? $task_duration_filter['month'] : date('m');
+            if(!is_null($this->input->post('month')) && ($data['month'] != $this->input->post('month'))){
+                $data['month'] = $this->input->post('month');
+                $task_duration_filter['month'] = $this->input->post('month');
+            }
+
+            $this->session->set_userdata('task_duration_filter', $task_duration_filter);
 
             $this->load->view('admin/tasks_duration/manage', $data);
             //$this->load->view('admin/scorecards/draft', $data);
