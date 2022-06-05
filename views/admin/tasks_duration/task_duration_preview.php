@@ -8,9 +8,9 @@
                 <div class="panel_s">
                    <div class="panel-body">
                       <?php if(!$this->input->get('project_id')){ ?>
-                      <a href="<?php echo admin_url('scorecards/task_duration'); ?>" class="btn btn-default pull-left"><?php echo _l('back_to_tasks_list'); ?></a>
+                      <a href="<?php echo admin_url('tasks'); ?>" class="btn btn-default pull-left"><?php echo _l('back_to_tasks_list'); ?></a>
                       <?php } else { ?>
-                      <a href="<?php echo admin_url('scorecards/task_duration/'.$this->input->get('project_id').'?group=project_tasks'); ?>" class="mtop5 pull-left btn btn-default"><?php echo _l('back_to_project'); ?></a>
+                      <a href="<?php echo admin_url('projects/view/'.$this->input->get('project_id').'?group=project_tasks'); ?>" class="mtop5 pull-left btn btn-default"><?php echo _l('back_to_project'); ?></a>
                       <?php } ?>
                       <div class="clearfix"></div>
                       <hr />
@@ -33,16 +33,17 @@
                                  $data['name'] = _l(date('F', mktime(0, 0, 0, $m, 1)));
                                  $months[] = $data;
                                }
-                               $selected = ($this->input->post('month') ? $this->input->post('month') : date('m'));
+                               $selected = ($month ? $month : date('m'));
                                if($this->input->post() && $this->input->post('month') == ''){
                                  $selected = '';
                                }
+
                                echo render_select('month',$months,array('month',array('name')),'',$selected,array('data-none-selected-text'=>_l('task_filter_detailed_all_months')),array(),'no-margin');
                                ?>
                          </div>
                          <div class="col-md-2 text-center border-right">
                             <div class="form-group no-margin select-placeholder">
-                               <select name="status" id="status" class="selectpicker no-margin" data-width="100%" data-title="<?php echo _l('task_status'); ?>" disabled>
+                               <select name="status" id="status" class="selectpicker no-margin" data-width="100%" data-title="<?php echo _l('task_status'); ?>">
                                   <option value="" selected><?php echo _l('task_list_all'); ?></option>
                                   <?php foreach($task_statuses as $status){ ?>
                                   <option value="<?php echo $status['id']; ?>" <?php if($this->input->post('status') == $status['id']){echo 'selected'; } ?>><?php echo $status['name']; ?></option>

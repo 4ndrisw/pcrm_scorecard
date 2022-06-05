@@ -30,10 +30,18 @@ $where  = [];
 
 if($this->ci->session->has_userdata('task_duration_filter')){
     $task_duration_filter  = $this->ci->session->userdata('task_duration_filter');
+    
+    $staff_id = isset($task_duration_filter['member']) ? $task_duration_filter['member'] : '';
+    $month = isset($task_duration_filter['month']) ? $task_duration_filter['month'] : date('m');
+}
+log_activity(json_encode($task_duration_filter));
+
+if(is_numeric($staff_id)){
+    array_push($where, 'AND ' . db_prefix() . 'scorecards_tasks_duration.staff_id =' . $staff_id);
 }
 
-if(isset($task_duration_filter['member']) && is_numeric($staff_id)){
-    array_push($where, 'AND ' . db_prefix() . 'scorecards_tasks_duration.staff_id =' . $staff_id);
+if(is_numeric($month)){
+    array_push($where, 'AND MONTH(' . db_prefix() . 'scorecards_tasks_duration.dateadded) =' . $month);
 }
 
 $additionalColumns = hooks()->apply_filters('scorecards_table_additional_columns_sql', [

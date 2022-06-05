@@ -11,6 +11,7 @@ class Scorecards extends AdminController
         $this->load->model('tasks_duration_model');
         $this->load->model('tasks_model');
         $this->load->model('projects_model');
+        $this->load->model('staff_model');
     }
 
     /* Get all scorecards in case user go on index page */
@@ -19,8 +20,26 @@ class Scorecards extends AdminController
         if (!has_permission('scorecards', '', 'view')) {
             access_denied('scorecards');
         }
+        $data = [];
 
+        $data['members']  = $this->staff_model->get();
+        $data['years']    = $this->tasks_model->get_distinct_tasks_years(($this->input->post('month_from') ? $this->input->post('month_from') : 'startdate'));
+        
+        $has_permission_create = has_permission('tasks', '', 'create');
+        $has_permission_view   = has_permission('tasks', '', 'view');
+        
+        $task_duration_filter = $this->session->userdata('task_duration_filter');
 
+        log_activity('1' . json_encode($task_duration_filter));
+        
+        if (!$has_permission_view) {
+            $staff_id = get_staff_user_id();
+        } elseif ($this->input->post('member')) {
+            $staff_id = $this->input->post('member');
+        } else {
+            $staff_id = '';
+        }
+        $data['staff_id'] = isset($task_duration_filter['member']) ? $task_duration_filter['member'] : $staff_id;
    
         if(is_numeric($id)){
             if ($this->input->is_ajax_request()) {
@@ -29,33 +48,26 @@ class Scorecards extends AdminController
 
             $task_duration = $this->tasks_duration_model->get($id);
             //if(empty($task_duration)) goto end;
+        if(!is_null($this->input->post('member')) && ($task_duration_filter['member'] != $this->input->post('member'))){
+            $data['staff_id'] = $this->input->post('member');
+            $task_duration_filter['member'] = $this->input->post('member');
+        }
+        $data['month'] = $task_duration_filter['month'];
+        if(!is_null($this->input->post('month')) && ($task_duration_filter['month'] != $this->input->post('month'))){
+            $data['month'] = $this->input->post('month');
+            $task_duration_filter['month'] = $this->input->post('month');
+        }
 
             $data['task_duration'] = $task_duration;
             $data['task_duration_id']            = $id;
             $data['title']                 = _l('task_duration_preview');
-            
 
-            $data['members']  = $this->staff_model->get();
-            $data['years']    = $this->tasks_model->get_distinct_tasks_years(($this->input->post('month_from') ? $this->input->post('month_from') : 'startdate'));
-            
-
-            $has_permission_create = has_permission('tasks', '', 'create');
-            $has_permission_view   = has_permission('tasks', '', 'view');
-
-            if (!$has_permission_view) {
-                $staff_id = get_staff_user_id();
-            } elseif ($this->input->post('member')) {
-                $staff_id = $this->input->post('member');
-            } else {
-                $staff_id = '';
-            }
-            $data['staff_id'] = $staff_id;
+            log_activity('2' . json_encode($task_duration_filter));
+            log_activity('3' . json_encode($data['month']));
 
 
-            $input_post = $this->input->post();
+            $this->session->set_userdata('task_duration_filter', $task_duration_filter);
 
-            $this->session->set_userdata('task_duration_filter', $input_post);
-            
             $this->load->view('admin/tasks_duration/task_duration_preview', $data);
             
             //$this->load->view('admin/scorecards/draft', $data);
@@ -66,11 +78,14 @@ class Scorecards extends AdminController
             if ($this->input->is_ajax_request()) {
                 $this->app->get_table_data(module_views_path('scorecards', 'admin/tables/table'));
             }
-            $data = [];
             //$where = ['datefinished'=>'IS NOT NULL']
             $data['tasks'] = $this->tasks_duration_model->get_billable_tasks();
-            $data['inspectionid']            = $id;
+            
             $data['title']                 = _l('scorecards_tracking');
+            
+            $input_post = $this->input->post();
+            $this->session->set_userdata('task_duration_filter', $input_post);
+
             $this->load->view('admin/tasks_duration/manage', $data);
             //$this->load->view('admin/scorecards/draft', $data);
         }
