@@ -8,7 +8,7 @@
                 <div class="panel_s">
                    <div class="panel-body">
                       <?php if(!$this->input->get('project_id')){ ?>
-                      <a href="<?php echo admin_url('tasks'); ?>" class="btn btn-default pull-left"><?php echo _l('back_to_tasks_list'); ?></a>
+                      <a href="<?php echo admin_url('scorecards/task_duration'); ?>" class="btn btn-default pull-left"><?php echo _l('back_to_tasks_list'); ?></a>
                       <?php } else { ?>
                       <a href="<?php echo admin_url('projects/view/'.$this->input->get('project_id').'?group=project_tasks'); ?>" class="mtop5 pull-left btn btn-default"><?php echo _l('back_to_project'); ?></a>
                       <?php } ?>
