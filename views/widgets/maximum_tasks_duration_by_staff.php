@@ -2,7 +2,7 @@
 <?php
     $CI = &get_instance();
     $CI->load->model('scorecards/tasks_duration_model');
-    $scorecards = $CI->tasks_duration_model->get_maximum_tasks_duration_by_staff(get_staff_user_id());
+    $scorecards = $CI->tasks_duration_model->get_maximum_task_duration_by_staff(get_staff_user_id());
 ?>
 
 <div class="widget" id="widget-<?php echo create_widget_id(); ?>" data-name="<?php echo _l('maximum_tasks_duration_by_staff'); ?>">
