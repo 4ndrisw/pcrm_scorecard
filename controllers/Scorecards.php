@@ -48,30 +48,26 @@ class Scorecards extends AdminController
 
             $task_duration = $this->tasks_duration_model->get($id);
             //if(empty($task_duration)) goto end;
-        if(!is_null($this->input->post('member')) && ($task_duration_filter['member'] != $this->input->post('member'))){
-            $data['staff_id'] = $this->input->post('member');
-            $task_duration_filter['member'] = $this->input->post('member');
-        }
-        $data['month'] = $task_duration_filter['month'];
-        if(!is_null($this->input->post('month')) && ($task_duration_filter['month'] != $this->input->post('month'))){
-            $data['month'] = $this->input->post('month');
-            $task_duration_filter['month'] = $this->input->post('month');
-        }
+
+            if(!is_null($this->input->post('member')) && ($data['staff_id'] != $this->input->post('member'))){
+                $data['staff_id'] = $this->input->post('member');
+                $task_duration_filter['member'] = $this->input->post('member');
+            }
+
+            $data['month'] = isset($task_duration_filter['month']) ? $task_duration_filter['month'] : date('m');
+            if(!is_null($this->input->post('month')) && ($data['month'] != $this->input->post('month'))){
+                $data['month'] = $this->input->post('month');
+                $task_duration_filter['month'] = $this->input->post('month');
+            }
 
             $data['task_duration'] = $task_duration;
             $data['task_duration_id']            = $id;
             $data['title']                 = _l('task_duration_preview');
 
-            log_activity('2' . json_encode($task_duration_filter));
-            log_activity('3' . json_encode($data['month']));
-
-
             $this->session->set_userdata('task_duration_filter', $task_duration_filter);
 
             $this->load->view('admin/tasks_duration/task_duration_preview', $data);
             
-            //$this->load->view('admin/scorecards/draft', $data);
-
         }
         else{
             //end:
