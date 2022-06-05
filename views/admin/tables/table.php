@@ -60,15 +60,7 @@ foreach ($rResult as $aRow) {
     for ($i = 0; $i < count($aColumns); $i++) {
         $_data = $aRow[$aColumns[$i]];
         if ($aColumns[$i] == db_prefix() . 'scorecards_tasks_duration.name') {
-            
             $_data = '<a href="' . admin_url('scorecards/task_duration/' . $aRow['id']) . '">' . $_data . '</a>';
-            $_data .= '<div class="row-options">';
-            $_data .= '<a href="' . admin_url('scorecards/task_duration/update/' . $aRow['id']) . '">' . _l('edit') . '</a>';
-
-            if (has_permission('scorecards', '', 'delete')) {
-                $_data .= ' | <a href="' . admin_url('scorecards/task_duration/delete/' . $aRow['id']) . '" class="text-danger _delete">' . _l('delete') . '</a>';
-            }
-            $_data .= '</div>';
             $_data = $_data;            
         }
         elseif ($aColumns[$i] == 'dateadded') {
