@@ -61,7 +61,7 @@ foreach ($rResult as $aRow) {
     for ($i = 0; $i < count($aColumns); $i++) {
         $_data = $aRow[$aColumns[$i]];
         if ($aColumns[$i] == db_prefix() . 'scorecards_tasks_duration.name') {
-            $_data = $_data;            
+            $_data = '<a href="' . admin_url('scorecards/task_duration/' . $aRow['id']) . '">' . $_data . '</a>';
         }
         elseif ($aColumns[$i] == 'dateadded') {
             $_data = $_data;
