@@ -44,7 +44,6 @@ log_activity('_task_history_filter_ ' . json_encode($task_history_filter));
 */
 
 $additionalColumns = hooks()->apply_filters('scorecards_table_additional_columns_sql', [
-    db_prefix() . 'scorecards_tasks_history.id',
     db_prefix() . 'tasks.id',
     db_prefix() . 'staff.firstname',
     db_prefix() . 'staff.lastname',
