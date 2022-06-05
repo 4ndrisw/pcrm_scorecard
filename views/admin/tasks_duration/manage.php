@@ -6,13 +6,6 @@
             <div class="col-md-12">                
                 <div class="panel_s">
                    <div class="panel-body">
-                      <?php if(!$this->input->get('project_id')){ ?>
-                      <a href="<?php echo admin_url('scorecards/task_duration'); ?>" class="btn btn-default pull-left"><?php echo _l('back_to_tasks_list'); ?></a>
-                      <?php } else { ?>
-                      <a href="<?php echo admin_url('scorecards/task_duration/'.$this->input->get('project_id').'?group=project_tasks'); ?>" class="mtop5 pull-left btn btn-default"><?php echo _l('back_to_project'); ?></a>
-                      <?php } ?>
-                      <div class="clearfix"></div>
-                      <hr />
                       <?php echo form_open($this->uri->uri_string() . ($this->input->get('project_id') ? '?project_id='.$this->input->get('project_id') : '')); ?>
                       <div class="row">
                          <?php echo form_hidden('project_id',$this->input->get('project_id')); ?>
@@ -31,8 +24,8 @@
                                  $data['month'] = $m;
                                  $data['name'] = _l(date('F', mktime(0, 0, 0, $m, 1)));
                                  $months[] = $data;
-                               }
-                               $selected = ($this->input->post('month') ? $this->input->post('month') : date('m'));
+                               }                               
+                               $selected = ($month ? $month : date('m'));
                                if($this->input->post() && $this->input->post('month') == ''){
                                  $selected = '';
                                }
@@ -65,14 +58,6 @@
                 </div>
                 <div class="panel_s">
                     <div class="panel-body">
-                     <?php if(has_permission('scorecards','','create')){ ?> 
-
-                     <div class="_buttons">
-                        <a href="<?php echo admin_url('scorecards/create'); ?>" class="btn btn-info pull-left display-block"><?php echo _l('new_scorecard'); ?></a>
-                    </div>
-                    <div class="clearfix"></div>
-                    <hr class="hr-panel-heading" />
-                    <?php } ?>
                     <?php render_datatable(array(
                         _l('tasks_name'),
                         _l('projects_name'),
