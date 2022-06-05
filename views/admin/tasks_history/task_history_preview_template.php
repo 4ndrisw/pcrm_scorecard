@@ -75,7 +75,7 @@
                           <dt><?= _l('task_history_project_name') ?> <span class="float-right">:</span></dt><dd><?=$project->name ?></dd>
                         </dl>
                          <div class="table-responsive">
-                            <table class="table dt-table">
+                            <table class="table task_history-items dt-table">
                                <thead>
                                   <tr>
                                     <th>No</th>
@@ -88,10 +88,9 @@
                                   <?php foreach($task_history as $history){ ?>
                                     <tr>
                                        <td><?= $i ?></td>
-                                       <td><?= $history->dateadded ?></td>
-                                       <td>
-                                       <?php echo format_task_status($history->status,'mtop5');  ?>
-
+                                       <td class="dateadded"><?= $history->dateadded ?></td>
+                                       <td class="status">
+                                          <?php echo format_task_status($history->status,'mtop5');  ?>
                                        </td>
                                     </tr>
                                   <?php $i++; ?>

@@ -1,3 +1,4 @@
 .task_duration-overview .dl-horizontal dt,
 .task_history-overview .dl-horizontal dt {text-align: left;}
 .float-right{float: right;}
+.task_history-items .status{background-color: #e3e7ff;}
