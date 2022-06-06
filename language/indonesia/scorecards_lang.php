@@ -36,3 +36,9 @@ $lang['task_duration_client_company'] 	='Pelanggan';
 $lang['task_duration_project_name'] 	='Proyek';
 $lang['scorecards_task_history'] 	='Riwayat tugas';
 $lang['tasks_history_tracking'] 	='Task history';
+$lang['tasks_duration_by_staff'] 	='Task durasi oleh staf';
+$lang['last_update'] 	='Terakhir update';
+$lang['duration'] 	='Durasi';
+$lang['minute'] 	='Menit';
+$lang['task_history_last_updated'] 	='Task history terakhir diperbaharui';
+

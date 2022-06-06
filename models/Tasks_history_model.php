@@ -41,4 +41,17 @@ class Tasks_history_model extends App_Model
 
         return $task_history;
     }
+
+    public function get_task_history_last_updated(){
+        $this->db->select(['max(firstname) AS first_name', 'max(lastname) AS last_name', 'max(dateadded) AS date_added']);
+        $this->db->group_by(['firstname']); 
+        $this->db->join(db_prefix() . 'task_assigned',db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'scorecards_tasks_history.task_id');
+        $this->db->join(db_prefix() . 'staff',db_prefix() . 'task_assigned.staffid = ' . db_prefix() . 'staff.staffid');
+        
+        //return $this->db->get_compiled_select(db_prefix() . 'scorecards_tasks_history');
+
+        $last_updated =  $this->db->get(db_prefix() . 'scorecards_tasks_history')->result();
+
+        return $last_updated;
+    }
 }

@@ -50,6 +50,11 @@ $lang['task_history_staff_id'] 	='Staff';
 $lang['task_history_client_company'] 	='Company';
 $lang['task_history_project_name'] 	='Project';
 $lang['tasks_history_tracking'] 	='Task history';
+$lang['tasks_duration_by_staff'] 	='Task duration by staff';
+$lang['last_update'] 	='Last update';
+$lang['duration'] 	='Duration';
+$lang['minute'] 	='Minutes';
+$lang['task_history_last_updated'] 	='Task history last updated';
 
 
 

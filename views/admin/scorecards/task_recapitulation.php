@@ -22,6 +22,14 @@
                                 <?php $this->load->view('widgets/daily_completed_task_by_staff'); ?>                        
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="task_history_last_updated col-md-6 col-sm-12">
+                                <?php $this->load->view('widgets/task_history_last_updated'); ?>                        
+                            </div>
+                        </div>
+
+
+
                     </div>
                 </div>
             </div>
