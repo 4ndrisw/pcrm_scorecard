@@ -45,6 +45,14 @@
                                 <?php $this->load->view('widgets/daily_completed_task'); ?>                        
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="daily_update_status col-md-6 col-sm-12">
+                                <?php $this->load->view('widgets/daily_update_status'); ?>                        
+                            </div>                            
+                        </div>
+
+
                     </div>
                 </div>
             </div>

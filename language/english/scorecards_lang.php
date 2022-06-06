@@ -56,9 +56,8 @@ $lang['duration'] 	='Duration';
 $lang['minute'] 	='Minutes';
 $lang['task_history_last_updated'] 	='Task history last updated';
 
-
-
-
-
-
+$lang['daily_update_status_perstaff'] 	='Daily update status perstaff';
+$lang['daily_update_status'] 	='Daily update status';
+$lang['update_status'] 	='Update status';
+$lang['date'] 	='Date';
 

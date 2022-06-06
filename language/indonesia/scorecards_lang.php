@@ -41,4 +41,21 @@ $lang['last_update'] 	='Terakhir update';
 $lang['duration'] 	='Durasi';
 $lang['minute'] 	='Menit';
 $lang['task_history_last_updated'] 	='Task history terakhir diperbaharui';
+$lang['daily_update_status'] 	='Tugas yang diupdate harian';
 
+
+$lang['task_history_last_updated'] 	='Task history last updated';
+
+$lang['daily_update_status_perstaff'] 	='Update status harian per staf';
+
+$lang['task_history_preview'] 	='Informasi riwayat tugas';
+$lang['task_history_lowercase'] 	='Riwayat tugas';
+$lang['task_history'] 	='Riwayat tugas';
+$lang['task_history_dateadded'] 	='Tanggal Mulai';
+$lang['task_history_datefinished'] 	='Tanggal selesai';
+$lang['task_history_staff_id'] 	='Staf';
+$lang['task_history_client_company'] 	='Perusahaan';
+$lang['task_history_project_name'] 	='Proyek';
+
+$lang['update_status'] 	='Update status';
+$lang['date'] 	='Tanggal';

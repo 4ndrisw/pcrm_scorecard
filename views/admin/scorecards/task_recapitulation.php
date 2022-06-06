@@ -26,6 +26,9 @@
                             <div class="task_history_last_updated col-md-6 col-sm-12">
                                 <?php $this->load->view('widgets/task_history_last_updated'); ?>                        
                             </div>
+                            <div class="daily_update_status_perstaff col-md-6 col-sm-12">
+                                <?php $this->load->view('widgets/daily_update_status_perstaff'); ?>                        
+                            </div>
                         </div>
 
 

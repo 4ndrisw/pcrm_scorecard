@@ -48,10 +48,26 @@ class Tasks_history_model extends App_Model
         $this->db->join(db_prefix() . 'task_assigned',db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'scorecards_tasks_history.task_id');
         $this->db->join(db_prefix() . 'staff',db_prefix() . 'task_assigned.staffid = ' . db_prefix() . 'staff.staffid');
         
+        $last_updated =  $this->db->get(db_prefix() . 'scorecards_tasks_history')->result();
+
+        return $last_updated;
+    }
+
+    public function get_daily_update_status_perstaff(){
+        $this->db->select(['DATE(dateadded) AS date_added', 'CONCAT(firstname," ",lastname) AS staff', 'COUNT(status) AS update_status']);
+        $this->db->group_by('firstname, lastname, date_added');
+        $this->db->order_by('date_added, firstname', 'DESC');
+
+        $this->db->join(db_prefix() . 'task_assigned',db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'scorecards_tasks_history.task_id');
+        $this->db->join(db_prefix() . 'staff',db_prefix() . 'task_assigned.staffid = ' . db_prefix() . 'staff.staffid');
+        
         //return $this->db->get_compiled_select(db_prefix() . 'scorecards_tasks_history');
 
         $last_updated =  $this->db->get(db_prefix() . 'scorecards_tasks_history')->result();
 
         return $last_updated;
     }
+
+
+
 }
