@@ -31,14 +31,14 @@
                             <?php 
                                 $date1 = new DateTime($scorecard->date_added);
                                 $date2 = new DateTime("now");
-                                $interval = $date1->diff($date2);
+                                $interval = $date2->diff($date1);
                             ?>    
 
                                 <tr>
                                     <td> <?php echo $i; ?></td>
                                     <td><?php echo $scorecard->first_name .' '. $scorecard->last_name; ?></td>
                                     <td><?php echo $scorecard->date_added; ?></td>
-                                    <td><?php echo $interval->d .' '. _l('days') .' '. $interval->i .' '. _l('minute'); ?> </td>
+                                    <td><?php echo $interval->h .' '. _l('hours') .' '. $interval->i .' '. _l('minute'); ?> </td>
                                 </tr>
                             <?php $i++; ?>
                             <?php } ?>
