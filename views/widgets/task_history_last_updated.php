@@ -38,7 +38,7 @@
                                     <td> <?php echo $i; ?></td>
                                     <td><?php echo $scorecard->first_name .' '. $scorecard->last_name; ?></td>
                                     <td><?php echo $scorecard->date_added; ?></td>
-                                    <td><?php echo $interval->h .' '. _l('hours') .' '. $interval->i .' '. _l('minute'); ?> </td>
+                                    <td><?php echo format_interval($interval); ?> </td>
                                 </tr>
                             <?php $i++; ?>
                             <?php } ?>

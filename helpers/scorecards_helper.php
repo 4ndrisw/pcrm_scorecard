@@ -827,3 +827,25 @@ function format_task_duration_status($status, $classes = '', $label = true)
 
     return $status;
 }
+
+/**
+ * Format an interval to show all existing components.
+ * If the interval doesn't have a time component (years, months, etc)
+ * That component won't be displayed.
+ *
+ * @param DateInterval $interval The interval
+ *
+ * @return string Formatted interval string.
+ */
+function format_interval(DateInterval $interval) {
+    $result = "";
+    if ($interval->y) { $result .= $interval->format("%y years "); }
+    if ($interval->m) { $result .= $interval->format("%m months "); }
+    if ($interval->d) { $result .= $interval->format("%d days "); }
+    if ($interval->h) { $result .= $interval->format("%h hours "); }
+    if ($interval->i) { $result .= $interval->format("%i minutes "); }
+    /*
+    if ($interval->s) { $result .= $interval->format("%s seconds "); }
+    */
+    return $result;
+}
