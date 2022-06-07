@@ -73,8 +73,8 @@ class Tasks_history_model extends App_Model
         $this->db->select(['DATE(dateadded) AS date_added', 'CONCAT(firstname," ",lastname) AS staff', 
             'COUNT(IF( STATUS = 1, 1, NULL )) task_status_1',
             'COUNT(IF( STATUS = 4, 1, NULL )) task_status_4',
-            'COUNT(IF( STATUS = 2, 1, NULL )) task_status_2',
             'COUNT(IF( STATUS = 3, 1, NULL )) task_status_3',
+            'COUNT(IF( STATUS = 2, 1, NULL )) task_status_2',
             'COUNT(IF( STATUS = 4, 1, NULL )) task_status_5',
         ]);
         $this->db->group_by('firstname, lastname, date_added');
