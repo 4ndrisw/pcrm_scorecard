@@ -47,11 +47,10 @@
                         </div>
 
                         <div class="row">
-                            <div class="daily_update_status col-md-6 col-sm-12">
-                                <?php $this->load->view('widgets/daily_update_status'); ?>                        
-                            </div>                            
+                            <div class="daily_count_update_status col-md-12 col-sm-12">
+                                <?php $this->load->view('widgets/daily_count_update_status'); ?>                        
+                            </div>
                         </div>
-
 
                     </div>
                 </div>

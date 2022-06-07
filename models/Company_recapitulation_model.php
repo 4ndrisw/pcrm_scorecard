@@ -88,5 +88,27 @@
             return $last_updated;
         }
 
+
+    public function get_daily_count_update_status(){
+        $this->db->select(['DATE(dateadded) AS date_added',  
+            'COUNT(IF( STATUS = 1, 1, NULL )) task_status_1',
+            'COUNT(IF( STATUS = 4, 1, NULL )) task_status_4',
+            'COUNT(IF( STATUS = 3, 1, NULL )) task_status_3',
+            'COUNT(IF( STATUS = 2, 1, NULL )) task_status_2',
+            'COUNT(IF( STATUS = 5, 1, NULL )) task_status_5',
+        ]);
+        $this->db->group_by('date_added');
+        $this->db->order_by('date_added', 'DESC');
+
+        $this->db->join(db_prefix() . 'task_assigned',db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'scorecards_tasks_history.task_id');
+    
+        //return $this->db->get_compiled_select(db_prefix() . 'scorecards_tasks_history');
+
+        $last_updated =  $this->db->get(db_prefix() . 'scorecards_tasks_history')->result();
+
+        return $last_updated;
+    }
+
+
     }
 
