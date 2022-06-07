@@ -75,7 +75,7 @@ class Tasks_history_model extends App_Model
             'COUNT(IF( STATUS = 4, 1, NULL )) task_status_4',
             'COUNT(IF( STATUS = 3, 1, NULL )) task_status_3',
             'COUNT(IF( STATUS = 2, 1, NULL )) task_status_2',
-            'COUNT(IF( STATUS = 4, 1, NULL )) task_status_5',
+            'COUNT(IF( STATUS = 5, 1, NULL )) task_status_5',
         ]);
         $this->db->group_by('firstname, lastname, date_added');
         $this->db->order_by('date_added, firstname', 'DESC');
