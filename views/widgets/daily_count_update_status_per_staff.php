@@ -26,8 +26,8 @@
                                 <th><?php echo _l('staff'); ?></th>
                                 <th><?php echo _l('task_status_1'); ?></th>
                                 <th><?php echo _l('task_status_4'); ?></th>
-                                <th><?php echo _l('task_status_2'); ?></th>
                                 <th><?php echo _l('task_status_3'); ?></th>
+                                <th><?php echo _l('task_status_2'); ?></th>
                                 <th><?php echo _l('task_status_5'); ?></th>
                             </tr>
                         </thead>
@@ -39,9 +39,9 @@
                                     <td><?php echo $scorecard->date_added; ?></td>
                                     <td><?php echo $scorecard->staff; ?></td>
                                     <td><?php echo $scorecard->task_status_1; ?> </td>
-                                    <td><?php echo $scorecard->task_status_2; ?> </td>
-                                    <td><?php echo $scorecard->task_status_3; ?> </td>
                                     <td><?php echo $scorecard->task_status_4; ?> </td>
+                                    <td><?php echo $scorecard->task_status_3; ?> </td>
+                                    <td><?php echo $scorecard->task_status_2; ?> </td>
                                     <td><?php echo $scorecard->task_status_5; ?> </td>
                                 </tr>
                             <?php $i++; ?>
