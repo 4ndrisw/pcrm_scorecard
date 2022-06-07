@@ -62,6 +62,7 @@
                         _l('tasks_name'),
                         _l('projects_name'),
                         _l('staff_task_name'),
+                        _l('date'),
                         ),'scorecards'); ?>
                     </div>
                 </div>
@@ -73,7 +74,7 @@
 <script type="text/javascript" id="scorecard-js" src="<?= base_url() ?>modules/scorecards/assets/js/scorecards.js?"></script>
 <script>
     $(function(){
-        initDataTable('.table-scorecards', window.location.href, 'undefined', 'undefined','fnServerParams', [2, 'desc']);
+        initDataTable('.table-scorecards', window.location.href, 'undefined', 'undefined','fnServerParams', [3, 'desc']);
     });
 </script>
 </body>

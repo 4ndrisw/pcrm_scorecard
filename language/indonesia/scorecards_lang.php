@@ -59,3 +59,4 @@ $lang['task_history_project_name'] 	='Proyek';
 
 $lang['update_status'] 	='Update status';
 $lang['date'] 	='Tanggal';
+$lang['daily_count_update_status_per_staff'] 	='Jumlah harian update status per staff';

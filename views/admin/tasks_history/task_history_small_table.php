@@ -8,6 +8,7 @@
             _l('tasks_name'),
             _l('projects_name'),
             _l('staff_task_name'),
+            _l('date'),
             ),'scorecards'); 
          ?>
         </div>

@@ -6,6 +6,7 @@ $aColumns = [
     db_prefix() . 'tasks.name',
     db_prefix() . 'projects.name',
     db_prefix() . 'staff.firstname',
+    db_prefix() . 'scorecards_tasks_history.dateadded',
 ];
 
 $sIndexColumn = 'id';
@@ -68,6 +69,10 @@ foreach ($rResult as $aRow) {
         }
         elseif ($aColumns[$i] == db_prefix() . 'staff.firstname') {
             $_data = $aRow['firstname'] .' '. $aRow['lastname'] ;
+        }
+
+        elseif ($aColumns[$i] == db_prefix() . 'scorecards_tasks_history.dateadded') {
+            $_data = $_data ;
         }
 
         $row[] = $_data;

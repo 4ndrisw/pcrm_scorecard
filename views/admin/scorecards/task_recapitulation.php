@@ -31,7 +31,11 @@
                             </div>
                         </div>
 
-
+                        <div class="row">
+                            <div class="daily_count_update_status_per_staff col-md-6 col-sm-12">
+                                <?php $this->load->view('widgets/daily_count_update_status_per_staff'); ?>                        
+                            </div>
+                        </div>
 
                     </div>
                 </div>
