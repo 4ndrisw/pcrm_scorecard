@@ -35,7 +35,7 @@
         $this->db->join(db_prefix() . 'taggables', db_prefix() . 'taggables.rel_id = ' . db_prefix() . 'tasks.id');
         $this->db->join(db_prefix() . 'tags', db_prefix() . 'tags.id = ' . db_prefix() . 'taggables.tag_id');
     
-        $this->db->group_by(['company',db_prefix().'projects.name',db_prefix().'tags.name']);
+        $this->db->group_by(['company',db_prefix().'projects.name',db_prefix().'tags.name'],db_prefix().'staff.firstname']);
         $this->db->where(db_prefix() . 'projects.status !=', '4');
         $this->db->order_by('start_date', 'DESC');
 
