@@ -60,7 +60,6 @@
                     </div>
                      <?//= $scorecards ?>
                     <div>
-                       
 
                   <div class="widget" id="widget-<?php echo create_widget_id(); ?>" data-name="<?php echo _l('clients_recapitulation'); ?>">
                       <?php if(staff_can('view', 'scorecards') || staff_can('view_own', 'scorecards')) { ?>
@@ -78,6 +77,7 @@
                                                   <th>No.</th>
                                                   <th><?php echo _l('company'); ?></th>
                                                   <th><?php echo _l('projects'); ?></th>
+                                                  <th><?php echo _l('project_status'); ?></th>
                                                   <th><?php echo _l('start_date'); ?></th>
                                                   <th><?php echo _l('equipment'); ?></th>
                                                   <th><?php echo _l('tasks'); ?></th>
@@ -92,10 +92,13 @@
                                           <tbody>
                                               <?php $i = 1; ?>
                                               <?php foreach ($scorecards as $scorecard) { ?>
-                                                  <tr>
+                                                <?php $task_status = 'status_task_uncomplete'; ?>
+                                                <?php if($scorecard->task == $scorecard->task_status_5){$task_status = 'status_task_complete';} ?>
+                                                  <tr class="<?= $task_status?>">
                                                       <td> <?php echo $i; ?></td>
                                                       <td><?php echo $scorecard->company; ?></td>
                                                       <td><?php echo $scorecard->project_name; ?> </td>
+                                                      <td><?php echo _l('project_status_'.$scorecard->project_status); ?> </td>
                                                       <td><?php echo $scorecard->start_date; ?> </td>
                                                       <td><?php echo $scorecard->tag_name; ?> </td>
                                                       <td><?php echo $scorecard->task; ?> </td>

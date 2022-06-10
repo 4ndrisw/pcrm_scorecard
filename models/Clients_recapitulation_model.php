@@ -16,6 +16,7 @@
         $this->db->select([
            db_prefix().'clients.company',
            db_prefix().'projects.name AS project_name',
+           db_prefix().'projects.status AS project_status',
            db_prefix().'projects.start_date',
            db_prefix().'tags.name AS tag_name',
            'count('. db_prefix().'tasks.id) AS "task"',

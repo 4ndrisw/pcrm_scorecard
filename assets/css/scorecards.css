@@ -2,3 +2,7 @@
 .task_history-overview .dl-horizontal dt {text-align: left;}
 .float-right{float: right;}
 .task_history-items .status{background-color: #e3e7ff;}
+tr.status_task_complete {
+    background: #12b900;
+    color: #150000;
+}
