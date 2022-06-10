@@ -82,11 +82,11 @@
                                                   <th><?php echo _l('equipment'); ?></th>
                                                   <th><?php echo _l('tasks'); ?></th>
 
-                                                  <th><?php echo _l('task_status_1'); ?></th>
-                                                  <th><?php echo _l('task_status_4'); ?></th>
-                                                  <th><?php echo _l('task_status_3'); ?></th>
-                                                  <th><?php echo _l('task_status_2'); ?></th>
-                                                  <th><?php echo _l('task_status_5'); ?></th>
+                                                  <th><?php echo 'N'; ?></th>
+                                                  <th><?php echo 'R'; ?></th>
+                                                  <th><?php echo 'L'; ?></th>
+                                                  <th><?php echo 'P'; ?></th>
+                                                  <th><?php echo 'C'; ?></th>
                                               </tr>
                                           </thead>
                                           <tbody>
