@@ -71,13 +71,14 @@
                                   <div class="table-vertical-scroll">
                                       <a href="<?php echo admin_url('scorecards'); ?>" class="mbot20 inline-block full-width"><?php echo _l('home_widget_view_all'); ?></a>
 
-                                      <table id="widget-<?php echo create_widget_id(); ?>" class="table dt-table" data-order-col="1" data-order-type="desc">
+                                      <table id="widget-<?php echo create_widget_id(); ?>" class="table dt-table" data-order-col="4" data-order-type="desc">
                                           <thead>
                                               <tr>
                                                   <th>No.</th>
                                                   <th><?php echo _l('company'); ?></th>
                                                   <th><?php echo _l('projects'); ?></th>
                                                   <th><?php echo _l('project_status'); ?></th>
+                                                  <th><?php echo _l('staff'); ?></th>
                                                   <th><?php echo _l('start_date'); ?></th>
                                                   <th><?php echo _l('equipment'); ?></th>
                                                   <th><?php echo _l('tasks'); ?></th>
@@ -99,6 +100,7 @@
                                                       <td><?php echo $scorecard->company; ?></td>
                                                       <td><?php echo $scorecard->project_name; ?> </td>
                                                       <td><?php echo _l('project_status_'.$scorecard->project_status); ?> </td>
+                                                      <td><?php echo $scorecard->staff_name; ?> </td>
                                                       <td><?php echo $scorecard->start_date; ?> </td>
                                                       <td><?php echo $scorecard->tag_name; ?> </td>
                                                       <td><?php echo $scorecard->task; ?> </td>
