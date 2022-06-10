@@ -746,6 +746,7 @@ function scorecards_task_status_changed($param) {
     }
 
 
+    log_activity(json_encode($data));
     return;
     log_activity(json_encode($data));
     $CI = &get_instance();

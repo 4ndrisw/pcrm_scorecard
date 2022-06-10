@@ -134,11 +134,11 @@ function scorecards_module_init_menu_items()
     }
     if (has_permission('scorecards', '', 'view')) {
     $CI->app_menu->add_sidebar_children_item('scorecards', [
-                'slug'     => 'scorecards-task-recapitulation',
-                'name'     => _l('scorecards_task_recapitulation'),
+                'slug'     => 'scorecards-clients-recapitulation',
+                'name'     => _l('scorecards_clients_recapitulation'),
                 'icon'     => 'fa fa-hourglass',
-                'href'     => admin_url('scorecards/task_recapitulation'),
-                'position' => 10,
+                'href'     => admin_url('scorecards/clients_recapitulation'),
+                'position' => 8,
         ]);
     }
     if (has_permission('scorecards', '', 'view')) {
@@ -147,6 +147,15 @@ function scorecards_module_init_menu_items()
                 'name'     => _l('scorecards_company_recapitulation'),
                 'icon'     => 'fa fa-hourglass',
                 'href'     => admin_url('scorecards/company_recapitulation'),
+                'position' => 9,
+        ]);
+    }
+    if (has_permission('scorecards', '', 'view')) {
+    $CI->app_menu->add_sidebar_children_item('scorecards', [
+                'slug'     => 'scorecards-task-recapitulation',
+                'name'     => _l('scorecards_task_recapitulation'),
+                'icon'     => 'fa fa-hourglass',
+                'href'     => admin_url('scorecards/task_recapitulation'),
                 'position' => 10,
         ]);
     }

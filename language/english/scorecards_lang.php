@@ -63,3 +63,5 @@ $lang['date'] 	='Date';
 $lang['daily_count_update_status_per_staff'] 	='Daily count update status per staff';
 $lang['daily_count_update_status'] 	='Daily count update status';
 
+$lang['scorecards_clients_recapitulation'] 	='Clients';
+
