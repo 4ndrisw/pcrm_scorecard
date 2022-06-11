@@ -64,4 +64,7 @@ $lang['daily_count_update_status_per_staff'] 	='Daily count update status per st
 $lang['daily_count_update_status'] 	='Daily count update status';
 
 $lang['scorecards_clients_recapitulation'] 	='Clients';
+$lang['clients_recapitulation'] 	='Clients recapitulation';
+$lang['start_date'] 	='Tanggal';
+$lang['equipment'] 	='Equipment';
 

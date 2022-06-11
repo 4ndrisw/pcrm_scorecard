@@ -75,7 +75,7 @@
                                           <thead>
                                               <tr>
                                                   <th>No.</th>
-                                                  <th><?php echo _l('company'); ?></th>
+                                                  <th><?php echo _l('client'); ?></th>
                                                   <th><?php echo _l('projects'); ?></th>
                                                   <th><?php echo _l('project_status'); ?></th>
                                                   <th><?php echo _l('staff'); ?></th>

@@ -63,3 +63,6 @@ $lang['daily_count_update_status_per_staff'] 	='Jumlah harian update status per 
 $lang['daily_count_update_status'] 	='Jumlah harian update status';
 
 $lang['scorecards_clients_recapitulation'] 	='Pelanggan';
+$lang['clients_recapitulation'] 	='Clients recapitulation';
+$lang['start_date'] 	='Tanggal';
+$lang['equipment'] 	='Equipment';
