@@ -17,7 +17,7 @@
            db_prefix().'clients.company',
            db_prefix().'projects.name AS project_name',
            db_prefix().'projects.status AS project_status',
-           'CONCAT(' .db_prefix().'staff.firstname, ' . db_prefix().'staff.lastname) AS "staff_name"',
+           'CONCAT(' .db_prefix().'staff.firstname," ", ' . db_prefix().'staff.lastname) AS "staff_name"',
            db_prefix().'projects.start_date',
            db_prefix().'tags.name AS tag_name',
            'count('. db_prefix().'tasks.id) AS "task"',
