@@ -109,6 +109,5 @@
         return $last_updated;
     }
 
-
     }
 

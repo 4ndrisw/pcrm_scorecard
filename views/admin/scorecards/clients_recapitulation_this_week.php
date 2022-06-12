@@ -3,57 +3,7 @@
 <div id="wrapper">
     <div class="content">
         <div class="row">
-            <div class="col-md-12">                
-                <div class="panel_s">
-                   <div class="panel-body">
-
-                      <?php echo form_open($this->uri->uri_string() . ($this->input->get('project_id') ? '?project_id='.$this->input->get('project_id') : '')); ?>
-                      <div class="row">
-                         <?php echo form_hidden('project_id',$this->input->get('project_id')); ?>
-                         
-                         <div class="col-md-2 border-right">
-                            <?php
-                               $months = array();
-
-                               for ($m = 1; $m <= 12; $m++) {
-                                 $data = array();
-                                 $data['month'] = $m;
-                                 $data['name'] = _l(date('F', mktime(0, 0, 0, $m, 1)));
-                                 $months[] = $data;
-                               }                               
-                               $selected = ($month ? $month : date('m'));
-                               if($this->input->post() && $this->input->post('month') == ''){
-                                 $selected = '';
-                               }
-                               echo render_select('month',$months,array('month',array('name')),'',$selected,array('data-none-selected-text'=>_l('task_filter_detailed_all_months')),array(),'no-margin');
-                               ?>
-                         </div>
-                         <div class="col-md-2 text-center border-right">
-                            <div class="form-group no-margin select-placeholder">
-                               <select name="status" id="status" class="selectpicker no-margin" data-width="100%" data-title="<?php echo _l('task_status'); ?>" disabled>
-                                  <option value="" selected><?php echo _l('task_list_all'); ?></option>
-                                  <?php foreach($task_statuses as $status){ ?>
-                                  <option value="<?php echo $status['id']; ?>" <?php if($this->input->post('status') == $status['id']){echo 'selected'; } ?>><?php echo $status['name']; ?></option>
-                                  <?php } ?>
-                               </select>
-                            </div>
-                         </div>
-                         <div class="col-md-2 border-right select-placeholder">
-                            <select name="year" id="year" class="selectpicker no-margin" data-width="100%">
-                               <?php foreach($years as $data){ ?>
-                               <option value="<?php echo $data['year']; ?>" <?php if($this->input->post('year') == $data['year'] || date('Y') == $data['year']){echo 'selected'; } ?>><?php echo $data['year']; ?></option>
-                               <?php } ?>
-                            </select>
-                         </div>
-                         <div class="col-md-2">
-                            <button type="submit" class="btn btn-info btn-block" style="margin-top:3px;"><?php echo _l('filter'); ?></button>
-                         </div>
-                      </div>
-                      <?php echo form_close(); ?>
-                   </div>
-                </div>
-
-
+            <div class="col-md-12">
                 <div class="panel_s">
                     <div class="panel-body">
 
@@ -76,9 +26,7 @@
                                               <tr>
                                                   <th>No.</th>
                                                   <th><?php echo _l('client'); ?></th>
-                                                  <th><?php echo _l('project_status'); ?></th>
                                                   <th><?php echo _l('staff'); ?></th>
-                                                  <th><?php echo _l('start_date'); ?></th>
                                                   <th><?php echo _l('equipment'); ?></th>
                                                   <th><?php echo _l('tasks'); ?></th>
 
@@ -98,12 +46,10 @@
                                                       <td> <?php echo $i; ?></td>
                                                       <td>
                                                         <?php 
-                                                            echo $scorecard->company .'<div class="italic">'. $scorecard->project_name .'</div>'; 
+                                                            echo $scorecard->company .'<div class="italic">#'. $scorecard->project_name .'</div>#' . $scorecard->start_date; 
                                                         ?>
                                                       </td>
-                                                      <td><?php echo _l('project_status_'.$scorecard->project_status); ?> </td>
                                                       <td><?php echo $scorecard->staff_name; ?> </td>
-                                                      <td><?php echo $scorecard->start_date; ?> </td>
                                                       <td><?php echo $scorecard->tag_name; ?> </td>
                                                       <td><?php echo $scorecard->task; ?> </td>
 

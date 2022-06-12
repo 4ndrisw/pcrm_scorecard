@@ -6,3 +6,7 @@ tr.status_task_complete {
     background: #12b900;
     color: #150000;
 }
+.italic {
+    font-style: italic;
+    font-weight: 700;
+}
