@@ -135,7 +135,7 @@ function scorecards_module_init_menu_items()
     if (has_permission('scorecards', '', 'view')) {
     $CI->app_menu->add_sidebar_children_item('scorecards', [
                 'slug'     => 'scorecards-clients-recapitulation-thisweek',
-                'name'     => _l('scorecards_clients_recapitulation'),
+                'name'     => _l('this_week'),
                 'icon'     => 'fa fa-hourglass',
                 'href'     => admin_url('scorecards/client_recapitulation_this_week'),
                 'position' => 8,
@@ -144,7 +144,7 @@ function scorecards_module_init_menu_items()
     if (has_permission('scorecards', '', 'view')) {
     $CI->app_menu->add_sidebar_children_item('scorecards', [
                 'slug'     => 'scorecards-clients-recapitulation',
-                'name'     => _l('this_week'),
+                'name'     => _l('scorecards_clients_recapitulation'),
                 'icon'     => 'fa fa-hourglass',
                 'href'     => admin_url('scorecards/clients_recapitulation'),
                 'position' => 8,
