@@ -9,6 +9,10 @@
 
                     </div>
                      <?//= $scorecards ?>
+
+
+
+
                     <div>
 
                   <div class="widget" id="widget-<?php echo create_widget_id(); ?>" data-name="<?php echo _l('clients_recapitulation'); ?>">
@@ -19,7 +23,29 @@
                               <hr class="hr-panel-heading-dashboard">
                               <?php if (!empty($scorecards)) { ?>
                                   <div class="table-vertical-scroll">
-                                      <a href="<?php echo admin_url('scorecards'); ?>" class="mbot20 inline-block full-width"><?php echo _l('home_widget_view_all'); ?></a>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href="<?php echo admin_url('scorecards'); ?>" class="mbot20 inline-block full-width"><?php echo _l('home_widget_view_all'); ?></a>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="pull-right _buttons">
+                                                <div class="btn-group">
+                                                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-pdf-o"></i><?php if(is_mobile()){echo ' PDF';} ?> <span class="caret"></span></a>
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li class="hidden-xs"><a href="<?php echo admin_url('scorecards/pdf/this_week'.'?output_type=I'); ?>"><?php echo _l('view_pdf'); ?></a></li>
+                                                        <li class="hidden-xs"><a href="<?php echo admin_url('scorecards/pdf/this_week'.'?output_type=I'); ?>" target="_blank"><?php echo _l('view_pdf_in_new_window'); ?></a></li>
+                                                        <li><a href="<?php echo admin_url('scorecards/pdf/this_week'); ?>"><?php echo _l('download'); ?></a></li>
+                                                        <li>
+                                                           <a href="<?php echo admin_url('scorecards/pdf/this_week'.'?print=true'); ?>" target="_blank">
+                                                           <?php echo _l('print'); ?>
+                                                           </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                       <table id="widget-<?php echo create_widget_id(); ?>" class="table dt-table" data-order-col="4" data-order-type="desc">
                                           <thead>
