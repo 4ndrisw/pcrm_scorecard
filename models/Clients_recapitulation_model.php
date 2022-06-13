@@ -114,10 +114,10 @@
      *
      * @return array
      */
-    public function get_client_recapitulation_this_week($staffId = null, $days = 7)
+    public function get_client_recapitulation_this_week($staffId = null, $days = 6)
     {
         $diff1 = date('Y-m-d', strtotime('-' . $days . ' days'));
-        $diff2 = date('Y-m-d', strtotime('+' . 0 . ' days'));
+        $diff2 = date('Y-m-d', strtotime('+' . 1 . ' days'));
         /*
         if ($staffId && ! staff_can('view', 'scorecards', $staffId)) {
             $this->db->where(db_prefix() . 'scorecards.addedfrom', $staffId);
