@@ -9,17 +9,13 @@
 
                     </div>
                      <?//= $scorecards ?>
-
-
-
-
                     <div>
 
-                  <div class="widget" id="widget-<?php echo create_widget_id(); ?>" data-name="<?php echo _l('clients_recapitulation'); ?>">
+                  <div class="widget" id="widget-<?php echo create_widget_id(); ?>" data-name="<?php echo _l('clients_recapitulation_this_week '); ?>">
                       <?php if(staff_can('view', 'scorecards') || staff_can('view_own', 'scorecards')) { ?>
                       <div class="panel_s scorecards-expiring">
                           <div class="panel-body padding-10">
-                              <p class="padding-5"><?php echo _l('clients_recapitulation'); ?></p>
+                              <p class="padding-5"><?php echo _l('clients_recapitulation_this_week '); ?></p>
                               <hr class="hr-panel-heading-dashboard">
                               <?php if (!empty($scorecards)) { ?>
                                   <div class="table-vertical-scroll">
