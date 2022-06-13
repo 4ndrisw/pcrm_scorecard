@@ -433,6 +433,18 @@ function scorecard_this_week_pdf($scorecard, $staffs, $tag = '')
     return app_pdf('scorecard',  module_libs_path(SCORECARDS_MODULE_NAME) . 'pdf/This_week_pdf', $scorecard, $staffs, $tag);
 }
 
+/**
+ * Prepare general scorecard pdf
+ * @since  Version 1.0.2
+ * @param  object $scorecard scorecard as object with all necessary fields
+ * @param  string $tag tag for bulk pdf exporter
+ * @return mixed object
+ */
+function scorecard_client_today_pdf($scorecard, $staffs, $tag = '')
+{
+    return app_pdf('scorecard',  module_libs_path(SCORECARDS_MODULE_NAME) . 'pdf/Client_today_pdf', $scorecard, $staffs, $tag);
+}
+
 
 
 /**

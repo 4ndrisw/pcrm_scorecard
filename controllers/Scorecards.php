@@ -345,9 +345,64 @@ class Scorecards extends AdminController
         }
 
         $file_name = slug_it('scorecard-week-' . $this_week_number);
-        $fileName = mb_strtoupper($file_name) . '.pdf';
+        $fileName = mb_strtolower($file_name) . '.pdf';
 
         $pdf->Output($fileName, $type);
 
     }
+
+
+    /* Generates scorecard PDF and senting to email  */
+    public function client_today( )
+    {
+
+        $today_number = date("N", time());
+        $month_number = date("m", time());
+
+        $scorecard        = $this->clients_recapitulation_model->get_client_recapitulation_today();
+        $staffs        = $this->clients_recapitulation_model->get_staff_grouped_today();
+        
+        /*
+        $scorecard->assigned_path = FCPATH . get_scorecard_upload_path('scorecard').$scorecard->id.'/assigned-'.$scorecard_number.'.png';
+        $scorecard->acceptance_path = FCPATH . get_scorecard_upload_path('scorecard').$scorecard->id .'/'.$scorecard->signature;
+        $scorecard->client_company = $this->clients_model->get($scorecard->clientid)->company;
+        $scorecard->acceptance_date_string = _dt($scorecard->acceptance_date);
+        */
+
+        try {
+            $pdf = scorecard_client_today_pdf($scorecard, $staffs);
+        } catch (Exception $e) {
+            $message = $e->getMessage();
+            echo $message;
+            if (strpos($message, 'Unable to get the size of the image') !== false) {
+                show_pdf_unable_to_get_image_size_error();
+            }
+            die;
+        }
+
+        $type = 'D';
+
+        if ($this->input->get('output_type')) {
+            $type = $this->input->get('output_type');
+        }
+
+        if ($this->input->get('print')) {
+            $type = 'I';
+        }
+
+        $file_name = slug_it('scorecard-day-' . $today_number);
+        $fileName = mb_strtolower($file_name) . '.pdf';
+
+        _maybe_create_upload_path('uploads/scorecards');
+        _maybe_create_upload_path('uploads/scorecards/'.$month_number);
+
+        if($type == 'F'){
+            $fileName = FCPATH . get_scorecard_upload_path('scorecard').$month_number.'/'.$fileName;
+        }
+        
+
+        $pdf->Output($fileName, $type);
+
+    }
+
 }
