@@ -237,6 +237,33 @@ class Scorecards extends AdminController
     }
 
     /* Get all scorecards in case user go on index page */
+    public function client_recapitulation_today($id = '')
+    {
+        if (!has_permission('scorecards', '', 'view')) {
+            access_denied('scorecards');
+        }
+        $data['years']    = $this->tasks_model->get_distinct_tasks_years(($this->input->post('month_from') ? $this->input->post('month_from') : 'startdate'));
+
+        $task_history_filter = $this->session->userdata('task_history_filter');
+
+        if(isset($task_history_filter['member'])){
+            $staff_id = $task_history_filter['member'];
+        }
+
+        $data['month'] = isset($task_history_filter['month']) ? $task_history_filter['month'] : date('m');
+        if(!is_null($this->input->post('month')) && ($data['month'] != $this->input->post('month'))){
+            $data['month'] = $this->input->post('month');
+            $task_history_filter['month'] = $this->input->post('month');
+        }
+
+        $this->session->set_userdata('task_history_filter', $task_history_filter);
+
+        $data['scorecards'] = $this->clients_recapitulation_model->get_client_recapitulation_today();
+                
+        $data['title']                 = _l('scorecards_this_week');
+        $this->load->view('admin/scorecards/clients_recapitulation_today', $data);
+    }
+    /* Get all scorecards in case user go on index page */
     public function client_recapitulation_this_week($id = '')
     {
         if (!has_permission('scorecards', '', 'view')) {

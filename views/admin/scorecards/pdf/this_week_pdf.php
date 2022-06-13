@@ -20,7 +20,7 @@ $pdf->ln(4);
 
 foreach($staffs as $staff){
     // create some HTML content
-    $pdf->ln(2);
+
     $html = "<h1>$staff->staff_name</h1>";
 
     // output the HTML content

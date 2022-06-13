@@ -69,3 +69,7 @@ $lang['equipment'] 	='Equipment';
 
 $lang['scorecards_this_week'] 	='Recapitulasi minggu ini';
 $lang['scorecards_today'] 	='Recapitulasi hari ini';
+
+$lang['clients_recapitulation_this_week'] 	='Recapitula client minggu ini';
+$lang['clients_recapitulation_today'] 	='Rekapitulasi client hari ini';
+

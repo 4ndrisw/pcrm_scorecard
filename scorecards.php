@@ -134,6 +134,15 @@ function scorecards_module_init_menu_items()
     }
     if (has_permission('scorecards', '', 'view')) {
     $CI->app_menu->add_sidebar_children_item('scorecards', [
+                'slug'     => 'scorecards-clients-recapitulation-today',
+                'name'     => _l('today'),
+                'icon'     => 'fa fa-hourglass',
+                'href'     => admin_url('scorecards/client_recapitulation_today'),
+                'position' => 8,
+        ]);
+    }
+    if (has_permission('scorecards', '', 'view')) {
+    $CI->app_menu->add_sidebar_children_item('scorecards', [
                 'slug'     => 'scorecards-clients-recapitulation-thisweek',
                 'name'     => _l('this_week'),
                 'icon'     => 'fa fa-hourglass',
