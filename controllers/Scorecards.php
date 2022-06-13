@@ -356,7 +356,7 @@ class Scorecards extends AdminController
     public function client_today( )
     {
 
-        $today_number = date("N", time());
+        $today_number = date("z", time());
         $month_number = date("m", time());
 
         $scorecard        = $this->clients_recapitulation_model->get_client_recapitulation_today();
