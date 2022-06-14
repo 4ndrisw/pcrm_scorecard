@@ -56,10 +56,10 @@
      *
      * @return array
      */
-    public function get_client_recapitulation_today($staffId = null, $days = 1)
+    public function get_client_recapitulation_today($staffId = null)
     {
-        $diff1 = date('Y-m-d', strtotime('-' . $days . ' days'));
-        $diff2 = date('Y-m-d', strtotime('+' . 1 . ' days'));
+
+        $today = date('Y-m-d', time());
         /*
         if ($staffId && ! staff_can('view', 'scorecards', $staffId)) {
             $this->db->where(db_prefix() . 'scorecards.addedfrom', $staffId);
@@ -93,8 +93,7 @@
         $this->db->group_by(['company',db_prefix().'projects.name',db_prefix().'tags.name',db_prefix().'staff.firstname',db_prefix().'staff.lastname']);
         $this->db->where(db_prefix() . 'projects.status !=', '4');
 
-        $this->db->where(db_prefix() . 'scorecards_tasks_history.dateadded >=', $diff1);
-        $this->db->where(db_prefix() . 'scorecards_tasks_history.dateadded <=', $diff2);
+        $this->db->where('DATE('.db_prefix() . 'scorecards_tasks_history.dateadded) =', $today);
 
         $this->db->order_by('start_date', 'DESC');
 
