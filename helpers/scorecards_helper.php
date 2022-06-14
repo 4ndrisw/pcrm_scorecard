@@ -730,8 +730,8 @@ function scorecards_daily_report($scorecards, $staff){
     $i = 1;
     $company_buffer = "";
     $message = "";
-    $message .= $staff->staff_name ."<br />";
-    $message .= slug_it('scorecard-day-' . $today)  ."<br />";
+    $message .= $staff->staff_name ."\r\n";
+    $message .= slug_it('scorecard-day-' . $today)  ."\r\n";
 
     foreach($scorecard_staffs as $scorecard_staff){
 
@@ -739,27 +739,27 @@ function scorecards_daily_report($scorecards, $staff){
 
             if($company_buffer == $scorecard_staff->company){
                 $message .= 
-                    "- Peralatan : ". $scorecard_staff->tag_name ."<br />".
-                    "-- Task :". $scorecard_staff->task ."<br />".
-                    "-- Report :". $scorecard_staff->task_status_4 ."<br />".
-                    "-- License :". $scorecard_staff->task_status_3 ."<br />".
-                    "-- PDF :". $scorecard_staff->task_status_2 ."<br />".
-                    "-- Complete :". $scorecard_staff->task_status_5 ."<br />".
-                    "--------------------------------------" ."<br />";
+                    "- Peralatan : ". $scorecard_staff->tag_name ."\r\n".
+                    "-- Task :". $scorecard_staff->task ."\r\n".
+                    "-- Report :". $scorecard_staff->task_status_4 ."\r\n".
+                    "-- License :". $scorecard_staff->task_status_3 ."\r\n".
+                    "-- PDF :". $scorecard_staff->task_status_2 ."\r\n".
+                    "-- Complete :". $scorecard_staff->task_status_5 ."\r\n".
+                    "--------------------------------------" ."\r\n";
             }else{
                 $message .= 
-                    "Client :" . $scorecard_staff->company ."<br />".
-                    "Project :". $scorecard_staff->project_name ."<br />".
-                    "start date : ". $scorecard_staff->start_date."<br />".
-                    "=========================" ."<br />".
+                    "Client :" . $scorecard_staff->company ."\r\n".
+                    "Project :". $scorecard_staff->project_name ."\r\n".
+                    "start date : ". $scorecard_staff->start_date."\r\n".
+                    "=========================" ."\r\n".
 
-                    "- Peralatan : ". $scorecard_staff->tag_name ."<br />".
-                    "-- Task :". $scorecard_staff->task ."<br />".
-                    "-- Report :". $scorecard_staff->task_status_4 ."<br />".
-                    "-- License :". $scorecard_staff->task_status_3 ."<br />".
-                    "-- PDF :". $scorecard_staff->task_status_2 ."<br />".
-                    "-- Complete :". $scorecard_staff->task_status_5 ."<br />".
-                    "--------------------------------------" ."<br />";
+                    "- Peralatan : ". $scorecard_staff->tag_name ."\r\n".
+                    "-- Task :". $scorecard_staff->task ."\r\n".
+                    "-- Report :". $scorecard_staff->task_status_4 ."\r\n".
+                    "-- License :". $scorecard_staff->task_status_3 ."\r\n".
+                    "-- PDF :". $scorecard_staff->task_status_2 ."\r\n".
+                    "-- Complete :". $scorecard_staff->task_status_5 ."\r\n".
+                    "--------------------------------------" ."\r\n";
             }                          
         }
         $company_buffer = $scorecard_staff->company; 
