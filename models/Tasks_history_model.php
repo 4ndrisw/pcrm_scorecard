@@ -53,7 +53,7 @@ class Tasks_history_model extends App_Model
         return $last_updated;
     }
 
-    public function get_daily_update_status_perstaff(){
+    public function get_daily_update_status_perstaff($today = false){
         $this->db->select(['DATE(dateadded) AS date_added', 'CONCAT(firstname," ",lastname) AS staff', 'COUNT(status) AS update_status']);
         $this->db->group_by('firstname, lastname, date_added');
         $this->db->order_by('date_added, firstname', 'DESC');
@@ -61,6 +61,10 @@ class Tasks_history_model extends App_Model
         $this->db->join(db_prefix() . 'task_assigned',db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'scorecards_tasks_history.task_id');
         $this->db->join(db_prefix() . 'staff',db_prefix() . 'task_assigned.staffid = ' . db_prefix() . 'staff.staffid');
         
+        if($today){
+            $this->db->where('DATE('.db_prefix() . 'scorecards_tasks_history.dateadded) =', date('Y-m-d'));
+        }
+
         //return $this->db->get_compiled_select(db_prefix() . 'scorecards_tasks_history');
 
         $last_updated =  $this->db->get(db_prefix() . 'scorecards_tasks_history')->result();
@@ -69,7 +73,7 @@ class Tasks_history_model extends App_Model
     }
 
 
-    public function get_daily_count_update_status_per_staff(){
+    public function get_daily_count_update_status_per_staff($today = false){
         $this->db->select(['DATE(dateadded) AS date_added', 'CONCAT(firstname," ",lastname) AS staff', 
             'COUNT(IF( STATUS = 1, 1, NULL )) task_status_1',
             'COUNT(IF( STATUS = 4, 1, NULL )) task_status_4',
@@ -82,6 +86,10 @@ class Tasks_history_model extends App_Model
 
         $this->db->join(db_prefix() . 'task_assigned',db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'scorecards_tasks_history.task_id');
         $this->db->join(db_prefix() . 'staff',db_prefix() . 'task_assigned.staffid = ' . db_prefix() . 'staff.staffid');
+
+        if($today){
+            $this->db->where('DATE('.db_prefix() . 'scorecards_tasks_history.dateadded) =', date('Y-m-d'));
+        }
         
         //return $this->db->get_compiled_select(db_prefix() . 'scorecards_tasks_history');
 
