@@ -47,7 +47,6 @@
 
     }
 
-
     /**
      * Get the scorecards about to expired in the given days
      *
@@ -82,12 +81,12 @@
            'COUNT(IF(  '.db_prefix().'tasks.status = 5, 1, NULL )) task_status_5',  
         ]);
 
-        $this->db->join(db_prefix() . 'task_assigned', db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'tasks.id');
-        $this->db->join(db_prefix() . 'staff', db_prefix() . 'staff.staffid = ' . db_prefix() . 'task_assigned.staffid');
-        $this->db->join(db_prefix() . 'projects', db_prefix() . 'projects.id = ' . db_prefix() . 'tasks.rel_id');
-        $this->db->join(db_prefix() . 'clients', db_prefix() . 'clients.userid = ' . db_prefix() . 'projects.clientid');
-        $this->db->join(db_prefix() . 'taggables', db_prefix() . 'taggables.rel_id = ' . db_prefix() . 'tasks.id');
-        $this->db->join(db_prefix() . 'tags', db_prefix() . 'tags.id = ' . db_prefix() . 'taggables.tag_id');
+        $this->db->join(db_prefix() . 'task_assigned', db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'tasks.id', 'LEFT');
+        $this->db->join(db_prefix() . 'staff', db_prefix() . 'staff.staffid = ' . db_prefix() . 'task_assigned.staffid', 'LEFT');
+        $this->db->join(db_prefix() . 'projects', db_prefix() . 'projects.id = ' . db_prefix() . 'tasks.rel_id', 'LEFT');
+        $this->db->join(db_prefix() . 'clients', db_prefix() . 'clients.userid = ' . db_prefix() . 'projects.clientid', 'LEFT');
+        $this->db->join(db_prefix() . 'taggables', db_prefix() . 'taggables.rel_id = ' . db_prefix() . 'tasks.id', 'LEFT');
+        $this->db->join(db_prefix() . 'tags', db_prefix() . 'tags.id = ' . db_prefix() . 'taggables.tag_id', 'LEFT');
         $this->db->join(db_prefix() . 'scorecards_tasks_history', db_prefix() . 'scorecards_tasks_history.task_id = ' . db_prefix() . 'tasks.id', 'LEFT');
     
         $this->db->group_by(['company',db_prefix().'projects.name',db_prefix().'tags.name',db_prefix().'staff.firstname',db_prefix().'staff.lastname']);
@@ -139,12 +138,12 @@
            'COUNT(IF(  '.db_prefix().'tasks.status = 5, 1, NULL )) task_status_5',  
         ]);
 
-        $this->db->join(db_prefix() . 'task_assigned', db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'tasks.id');
-        $this->db->join(db_prefix() . 'staff', db_prefix() . 'staff.staffid = ' . db_prefix() . 'task_assigned.staffid');
-        $this->db->join(db_prefix() . 'projects', db_prefix() . 'projects.id = ' . db_prefix() . 'tasks.rel_id');
-        $this->db->join(db_prefix() . 'clients', db_prefix() . 'clients.userid = ' . db_prefix() . 'projects.clientid');
-        $this->db->join(db_prefix() . 'taggables', db_prefix() . 'taggables.rel_id = ' . db_prefix() . 'tasks.id');
-        $this->db->join(db_prefix() . 'tags', db_prefix() . 'tags.id = ' . db_prefix() . 'taggables.tag_id');
+        $this->db->join(db_prefix() . 'task_assigned', db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'tasks.id', 'LEFT');
+        $this->db->join(db_prefix() . 'staff', db_prefix() . 'staff.staffid = ' . db_prefix() . 'task_assigned.staffid', 'LEFT');
+        $this->db->join(db_prefix() . 'projects', db_prefix() . 'projects.id = ' . db_prefix() . 'tasks.rel_id', 'LEFT');
+        $this->db->join(db_prefix() . 'clients', db_prefix() . 'clients.userid = ' . db_prefix() . 'projects.clientid', 'LEFT');
+        $this->db->join(db_prefix() . 'taggables', db_prefix() . 'taggables.rel_id = ' . db_prefix() . 'tasks.id', 'LEFT');
+        $this->db->join(db_prefix() . 'tags', db_prefix() . 'tags.id = ' . db_prefix() . 'taggables.tag_id', 'LEFT');
         $this->db->join(db_prefix() . 'scorecards_tasks_history', db_prefix() . 'scorecards_tasks_history.task_id = ' . db_prefix() . 'tasks.id', 'LEFT');
     
         $this->db->group_by(['company',db_prefix().'projects.name',db_prefix().'tags.name',db_prefix().'staff.firstname',db_prefix().'staff.lastname']);
@@ -213,7 +212,6 @@
     {
         $diff1 = date('Y-m-d', strtotime('-' . $days . ' days'));
         $diff2 = date('Y-m-d', strtotime('+' . 1 . ' days'));
-
 
         $this->db->select([
            'CONCAT(' .db_prefix().'staff.firstname," ", ' . db_prefix().'staff.lastname) AS "staff_name"',

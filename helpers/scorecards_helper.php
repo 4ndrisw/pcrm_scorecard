@@ -379,7 +379,7 @@ function user_can_view_scorecard($id, $staff_id = false)
 
         $CI = &get_instance();
         $CI->load->model('scorecards_model');
-       
+
         $scorecard = $CI->scorecards_model->get($id);
         if (!$scorecard) {
             show_404();
@@ -390,7 +390,7 @@ function user_can_view_scorecard($id, $staff_id = false)
                 show_404();
             }
         }
-    
+
         return true;
     }
 
@@ -500,7 +500,7 @@ function add_new_scorecard_item_post($item, $rel_id, $rel_type)
 }
 
 /**
- * Update scorecard item from $_POST 
+ * Update scorecard item from $_POST
  * @param  mixed $item_id item id to update
  * @param  array $data    item $_POST data
  * @param  string $field   field is require to be passed for long_description,rate,item_order to do some additional checkings
@@ -581,7 +581,7 @@ function get_scorecard_upload_path($type=NULL)
 {
    $type = 'scorecard';
    $path = SCORECARD_ATTACHMENTS_FOLDER;
-   
+
     return hooks()->apply_filters('get_upload_path_by_type', $path, $type);
 }
 
@@ -724,28 +724,47 @@ function scorecard_app_client_includes()
 }
 
 
-function after_scorecard_updated($id){
+function scorecards_daily_report($scorecards, $staff){
 
+    $scorecard_staffs = $scorecards;
+    $i = 1;
+    $company_buffer = "";
+    $message = "";
+    $message .= $staff->staff_name ."<br />";
+    foreach($scorecard_staffs as $scorecard_staff){
 
+        if($scorecard_staff->staff_name == $staff->staff_name){
+
+            if($company_buffer == $scorecard_staff->company){
+                $message .= 
+                    "- Peralatan : ". $scorecard_staff->tag_name ."<br />".
+                    "-- Task :". $scorecard_staff->task ."<br />".
+                    "-- Report :". $scorecard_staff->task_status_4 ."<br />".
+                    "-- License :". $scorecard_staff->task_status_3 ."<br />".
+                    "-- PDF :". $scorecard_staff->task_status_2 ."<br />".
+                    "-- Complete :". $scorecard_staff->task_status_5 ."<br />".
+                    "--------------------------------------" ."<br />";
+            }else{
+                $message .= 
+                    "Client " . $scorecard_staff->company ."<br />".
+                    "Project :". $scorecard_staff->project_name ."<br />".
+                    "start date : ". $scorecard_staff->start_date."<br />".
+                    "=========================" ."<br />".
+
+                    "- Peralatan : ". $scorecard_staff->tag_name ."<br />".
+                    "-- Task :". $scorecard_staff->task ."<br />".
+                    "-- Report :". $scorecard_staff->task_status_4 ."<br />".
+                    "-- License :". $scorecard_staff->task_status_3 ."<br />".
+                    "-- PDF :". $scorecard_staff->task_status_2 ."<br />".
+                    "-- Complete :". $scorecard_staff->task_status_5 ."<br />".
+                    "--------------------------------------" ."<br />";
+            }                          
+        }
+        $company_buffer = $scorecard_staff->company; 
+        $i++;
+    }
+    return $message;
 }
-
-function scorecard_create_assigned_qrcode_hook($id){
-     
-     log_activity( 'Hello, world!' );
-
-}
-
-function scorecard_status_changed_hook($data){
-
-    log_activity('scorecard_status_changed');
-
-}
-
-//  215:      hooks()->do_action('after_add_task', $task_id);
-//  301:      hooks()->do_action('after_add_task', $insert_id);
-// 1574:      hooks()->do_action('task_status_changed', ['status' => $status, 'task_id' => $task_id]);
-
-
 function scorecards_task_status_changed($param) {
 
     $data = [];
@@ -757,22 +776,14 @@ function scorecards_task_status_changed($param) {
     $CI->db->where('key_id', $data['key_id']);
     $q = $CI->db->get(db_prefix() . 'scorecards_tasks_history');
     $CI->db->reset_query();
-        
-    if ( $q->num_rows() > 0 ) 
+
+    if ( $q->num_rows() > 0 )
     {
-        //$this->db->where('id', $id);
-        //$this->db->update('your_table_name', $data);
         $CI->db->where('key_id', $data['key_id'])->update(db_prefix() . 'scorecards_tasks_history', $data);
     } else {
-        //$this->db->set('id', $id);
-        //$this->db->insert('your_table_name', $data);
         $CI->db->set('key_id', $data['key_id'])->insert(db_prefix() . 'scorecards_tasks_history', $data);
     }
 
-
-    log_activity(json_encode($data));
-    return;
-    log_activity(json_encode($data));
     $CI = &get_instance();
     $CI->load->model('tasks_model');
 
@@ -784,7 +795,7 @@ function scorecards_task_status_changed($param) {
     $params = [];
 
 
-    $params['task_id'] = $task->id;    
+    $params['task_id'] = $task->id;
     $params['name'] = $task->name;
     $params['rel_id'] = $task->rel_id;
     $params['rel_type'] = $task->rel_type;
@@ -793,7 +804,7 @@ function scorecards_task_status_changed($param) {
 
     $params['dateadded'] = $task->dateadded;
     $params['datefinished'] = $task->datefinished;
-    
+
     $date1 = new DateTime($task->startdate);
     $date2 = new DateTime($task->datefinished);
 
@@ -805,32 +816,7 @@ function scorecards_task_status_changed($param) {
     $params['staffid'] = $task->assignees[0]['assigneeid'];
     $params['firstname'] = $task->assignees[0]['firstname'];
     $params['lastname'] = $task->assignees[0]['lastname'];
-    
 
-    log_activity(json_encode($params));
-    /*
-
-
-
-    $CI = &get_instance();
-    $this->load->model('tasks_model');
-
-    $task = $CI->tasks_model->get($data['task_id']);
-
-    log_activity(json_encode($task));
-
-    switch ($data['status']) {
-        case '5':
-            // complete
-
-
-            break;
-        
-        default:
-            // code...
-            break;
-    }
-    */
 }
 
 

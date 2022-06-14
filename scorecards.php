@@ -15,7 +15,7 @@ define('SCORECARD_ATTACHMENTS_FOLDER', 'uploads/scorecards/');
 hooks()->add_filter('before_scorecard_updated', '_format_data_scorecard_feature');
 hooks()->add_filter('before_scorecard_added', '_format_data_scorecard_feature');
 
-hooks()->add_action('after_cron_run', 'scorecards_notification');
+//hooks()->add_action('after_cron_run', 'scorecards_after_cron_run');
 hooks()->add_action('admin_init', 'scorecards_module_init_menu_items');
 hooks()->add_action('admin_init', 'scorecards_permissions');
 //hooks()->add_action('clients_init', 'scorecards_clients_area_menu_items');

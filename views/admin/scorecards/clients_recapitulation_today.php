@@ -6,12 +6,9 @@
             <div class="col-md-12 scorecards-today ">
                 <div class="panel_s">
                     <div class="panel-body">
-
                     </div>
                      <?//= $scorecards ?>
-                    <div>
-
-                  <div class="widget" id="widget-<?php echo create_widget_id(); ?>" data-name="<?php echo _l('clients_recapitulation_today '); ?>">
+                    <div class="widget" id="widget-<?php echo create_widget_id(); ?>" data-name="<?php echo _l('clients_recapitulation_today '); ?>">
                       <?php if(staff_can('view', 'scorecards') || staff_can('view_own', 'scorecards')) { ?>
                       <div class="panel_s scorecards-expiring">
                           <div class="panel-body padding-10">
@@ -98,73 +95,18 @@
                           </div>
                       </div>
                       <?php } ?>
-                  </div>
-
-
-
                     </div>
-
                 </div>
-
             </div>
             <div class="col-md-12 messages">
-
                 <div class="panel_s">
                     <div class="panel-body">
                         <?php 
                             foreach($staffs as $staff){
-                                // create some HTML content
-
-                                $html = $staff->staff_name ."<br />";
-
-                                // output the HTML content
-                                echo $html;
-                                $scorecard_staffs = $scorecards;
-                                $i = 1;
-                                $company_buffer = "";
-                                $tbl_po = "";
-                                foreach($scorecard_staffs as $scorecard_staff){
-
-                                    if($scorecard_staff->staff_name == $staff->staff_name){
-
-                                        if($company_buffer == $scorecard_staff->company){
-                                            $tbl_po .= 
-                                            "- Peralatan : ". $scorecard_staff->tag_name ."<br />".
-                                            "-- Task :". $scorecard_staff->task ."<br />".
-                                            "-- Report :". $scorecard_staff->task_status_4 ."<br />".
-                                            "-- License :". $scorecard_staff->task_status_3 ."<br />".
-                                            "-- PDF :". $scorecard_staff->task_status_2 ."<br />".
-                                            "-- Complete :". $scorecard_staff->task_status_5 ."<br />".
-                                            "--------------------------------------" ."<br />";
-                                            }else{
-                                            $tbl_po .= 
-                                            "Client " . $scorecard_staff->company ."<br />".
-                                            "Project :". $scorecard_staff->project_name ."<br />".
-                                            "start_date : ". $scorecard_staff->start_date."<br />".
-                                            "=========================" ."<br />".
-
-                                            "- Peralatan : ". $scorecard_staff->tag_name ."<br />".
-                                            "-- Task :". $scorecard_staff->task ."<br />".
-                                            "-- Report :". $scorecard_staff->task_status_4 ."<br />".
-                                            "-- License :". $scorecard_staff->task_status_3 ."<br />".
-                                            "-- PDF :". $scorecard_staff->task_status_2 ."<br />".
-                                            "-- Complete :". $scorecard_staff->task_status_5 ."<br />".
-                                            "--------------------------------------" ."<br />";
-                                        }                          
-                                    }
-
-                                        $company_buffer = $scorecard_staff->company; 
-                                    $i++;
-
-                                }
-
-                                $tbl_po .= "";
-                                
-                                echo $tbl_po;
+                                $message = scorecards_daily_report($scorecards, $staff);
+                                echo $message;
                             }
-
                         ?>
-
                     </div>
                 </div>
             </div>
