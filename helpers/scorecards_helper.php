@@ -725,12 +725,14 @@ function scorecard_app_client_includes()
 
 
 function scorecards_daily_report($scorecards, $staff){
-
+    $today = date("z", time());
     $scorecard_staffs = $scorecards;
     $i = 1;
     $company_buffer = "";
     $message = "";
     $message .= $staff->staff_name ."<br />";
+    $message .= slug_it('scorecard-day-' . $today)  ."<br />";
+
     foreach($scorecard_staffs as $scorecard_staff){
 
         if($scorecard_staff->staff_name == $staff->staff_name){
@@ -746,7 +748,7 @@ function scorecards_daily_report($scorecards, $staff){
                     "--------------------------------------" ."<br />";
             }else{
                 $message .= 
-                    "Client " . $scorecard_staff->company ."<br />".
+                    "Client :" . $scorecard_staff->company ."<br />".
                     "Project :". $scorecard_staff->project_name ."<br />".
                     "start date : ". $scorecard_staff->start_date."<br />".
                     "=========================" ."<br />".
