@@ -129,7 +129,7 @@
            'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 2, 1, NULL )) task_status_2',
            'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 5, 1, NULL )) task_status_5',  
         ]);
-        $this->db->group_by(['company',db_prefix().'projects.name',db_prefix().'tags.name','staff','date_added']);
+        $this->db->group_by([db_prefix().'clients.company',db_prefix().'projects.name',db_prefix().'tags.name','staff','date_added']);
         $this->db->order_by('date_added, staff', 'DESC');
 
         $this->db->join(db_prefix() . 'task_assigned',db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'scorecards_tasks_history.task_id');
