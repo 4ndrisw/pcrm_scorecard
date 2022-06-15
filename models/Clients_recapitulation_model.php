@@ -111,9 +111,10 @@
      *
      * @return array
      */
-    public function get_client_recapitulation_today($today = false)
+    public function get_client_recapitulation_today($staffId = false)
     {
         $today = date('Y-m-d', time());
+
         $this->db->select([
            db_prefix().'clients.company',
            db_prefix().'projects.name AS project_name',
@@ -121,33 +122,28 @@
            'CONCAT(' .db_prefix().'staff.firstname," ", ' . db_prefix().'staff.lastname) AS "staff_name"',
            db_prefix().'projects.start_date',
            db_prefix().'tags.name AS tag_name',
-           'count('. db_prefix().'tasks.id) AS "task"',
-           'COUNT(IF(  '.db_prefix().'tasks.status = 1, 1, NULL )) task_status_1',
-           'COUNT(IF(  '.db_prefix().'tasks.status = 4, 1, NULL )) task_status_4',
-           'COUNT(IF(  '.db_prefix().'tasks.status = 3, 1, NULL )) task_status_3',
-           'COUNT(IF(  '.db_prefix().'tasks.status = 2, 1, NULL )) task_status_2',
-           'COUNT(IF(  '.db_prefix().'tasks.status = 5, 1, NULL )) task_status_5',  
+           'count('. db_prefix().'tasks.id) AS "task"','DATE('.db_prefix() . 'scorecards_tasks_history.dateadded) AS date_added', 'CONCAT(firstname," ",lastname) AS staff', 
+           'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 1, 1, NULL )) task_status_1',
+           'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 4, 1, NULL )) task_status_4',
+           'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 3, 1, NULL )) task_status_3',
+           'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 2, 1, NULL )) task_status_2',
+           'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 5, 1, NULL )) task_status_5',  
         ]);
+        $this->db->group_by('staff,date_added');
+        $this->db->order_by('date_added, staff', 'DESC');
 
-        $this->db->join(db_prefix() . 'tasks', db_prefix() . 'scorecards_tasks_history.task_id = ' . db_prefix() . 'tasks.id');
+        $this->db->join(db_prefix() . 'task_assigned',db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'scorecards_tasks_history.task_id');
+        $this->db->join(db_prefix() . 'staff',db_prefix() . 'task_assigned.staffid = ' . db_prefix() . 'staff.staffid');
+        $this->db->join(db_prefix() . 'tasks', db_prefix() . 'scorecards_tasks_history.task_id = ' . db_prefix() . 'tasks.id', 'LEFT');
+    
+
         $this->db->join(db_prefix() . 'projects', db_prefix() . 'projects.id = ' . db_prefix() . 'tasks.rel_id', 'LEFT');
-        $this->db->join(db_prefix() . 'task_assigned', db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'tasks.id', 'LEFT');
-        $this->db->join(db_prefix() . 'staff', db_prefix() . 'staff.staffid = ' . db_prefix() . 'task_assigned.staffid', 'LEFT');
         $this->db->join(db_prefix() . 'clients', db_prefix() . 'clients.userid = ' . db_prefix() . 'projects.clientid', 'LEFT');
         $this->db->join(db_prefix() . 'taggables', db_prefix() . 'taggables.rel_id = ' . db_prefix() . 'tasks.id', 'LEFT');
         $this->db->join(db_prefix() . 'tags', db_prefix() . 'tags.id = ' . db_prefix() . 'taggables.tag_id', 'LEFT');
-    
-        $this->db->group_by(['company',db_prefix().'projects.name',db_prefix().'tags.name',db_prefix().'staff.firstname',db_prefix().'staff.lastname']);
-        //$this->db->where(db_prefix() . 'projects.status !=', '4');
+        
 
         $this->db->where('DATE('.db_prefix() . 'scorecards_tasks_history.dateadded) =', $today);
-
-        $this->db->order_by('start_date', 'DESC');
-
-
-        if($today){
-            $this->db->where('DATE('.db_prefix() . 'scorecards_tasks_history.dateadded) =', date('Y-m-d'));
-        }
         
         //return $this->db->get_compiled_select(db_prefix() . 'scorecards_tasks_history');
 
