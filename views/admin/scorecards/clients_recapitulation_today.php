@@ -40,14 +40,14 @@
                                         </div>
                                     </div>
 
-                                      <table id="widget-<?php echo create_widget_id(); ?>" class="table dt-table" data-order-col="4" data-order-type="desc">
+                                      <table id="widget-<?php echo create_widget_id(); ?>" class="table dt-table" data-order-col="2" data-order-type="desc">
                                           <thead>
                                               <tr>
                                                   <th>No.</th>
                                                   <th><?php echo _l('client'); ?></th>
                                                   <th><?php echo _l('staff'); ?></th>
                                                   <th><?php echo _l('equipment'); ?></th>
-                                                  <th><?php echo _l('tasks'); ?></th>
+                                                  <th><?php //echo _l('tasks'); ?></th>
 
                                                   <th><?php echo 'N'; ?></th>
                                                   <th><?php echo 'R'; ?></th>
@@ -70,7 +70,7 @@
                                                       </td>
                                                       <td><?php echo $scorecard->staff_name; ?> </td>
                                                       <td><?php echo $scorecard->tag_name; ?> </td>
-                                                      <td><?php echo $scorecard->task; ?> </td>
+                                                      <td><?php // echo $scorecard->task; ?> </td>
 
                                                       <td><?php echo $scorecard->task_status_1; ?> </td>
                                                       <td><?php echo $scorecard->task_status_4; ?> </td>
@@ -89,7 +89,7 @@
                               <?php } else { ?>
                                   <div class="text-center padding-5">
                                       <i class="fa fa-check fa-5x" aria-hidden="true"></i>
-                                      <h4><?php echo _l('no_tasks_duration_by_staff',["7"]) ; ?> </h4>
+                                      <h4><?php echo _l('no_tasks_duration_by_staff',["2"]) ; ?> </h4>
                                   </div>
                               <?php } ?>
                           </div>
@@ -118,7 +118,7 @@
 <script type="text/javascript" id="scorecard-js" src="<?= base_url() ?>modules/scorecards/assets/js/scorecards.js?"></script>
 <script>
     $(function(){
-        initDataTable('.table-scorecards', window.location.href, 'undefined', 'undefined','fnServerParams', [3, 'desc']);
+        initDataTable('.table-scorecards', window.location.href, 'undefined', 'undefined','fnServerParams', [7, 'desc']);
     });
 </script>
 </body>
