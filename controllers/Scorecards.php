@@ -261,7 +261,7 @@ class Scorecards extends AdminController
         $data['scorecards'] = $this->clients_recapitulation_model->get_client_recapitulation_today();
         $data['staffs'] = $this->clients_recapitulation_model->get_staff_grouped_today();
         
-        $data['title']                 = _l('scorecards_this_week');
+        $data['title']                 = _l('scorecards_today');
         $this->load->view('admin/scorecards/clients_recapitulation_today', $data);
     }
 
