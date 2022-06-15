@@ -75,4 +75,5 @@ $lang['scorecard_client_today_pdf_heading'] 	='Scorecard today';
 
 $lang['clients_recapitulation_this_week'] 	='Clients recapitulation this week';
 $lang['clients_recapitulation_today'] 	='Clients recapitulation today';
+$lang['recapitulation_date_select'] 	='Recapitulation date:';
 

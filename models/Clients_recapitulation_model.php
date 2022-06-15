@@ -111,10 +111,10 @@
      *
      * @return array
      */
-    public function get_client_recapitulation_today($staffId = false)
+    public function get_client_recapitulation_today($recapitulation_date = '', $staffId = false)
     {
-        $today = date('Y-m-d', time());
 
+        $today = isset($recapitulation_date) ? $recapitulation_date :  date('Y-m-d', time());
         $this->db->select([
            db_prefix().'clients.company',
            db_prefix().'projects.name AS project_name',
@@ -258,11 +258,9 @@
      *
      * @return array
      */
-    public function get_staff_grouped_today($days = 1)
+    public function get_staff_grouped_today($recapitulation_date = '', $days = 1)
     {
 
-        $today = date('Y-m-d', time());
-        
         $this->db->select([
            'CONCAT(' .db_prefix().'staff.firstname," ", ' . db_prefix().'staff.lastname) AS "staff_name"',
         ]);
@@ -275,7 +273,7 @@
         $this->db->group_by([db_prefix().'staff.firstname',db_prefix().'staff.lastname']);
         $this->db->where(db_prefix() . 'projects.status !=', '4');
 
-        $this->db->where('DATE('.db_prefix() . 'scorecards_tasks_history.dateadded) =', $today);
+        $this->db->where('DATE('.db_prefix() . 'scorecards_tasks_history.dateadded) =', $recapitulation_date);
 
         $this->db->order_by('staff_name', 'ASC');
 

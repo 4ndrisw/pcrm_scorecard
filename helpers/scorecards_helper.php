@@ -440,9 +440,9 @@ function scorecard_this_week_pdf($scorecard, $staffs, $tag = '')
  * @param  string $tag tag for bulk pdf exporter
  * @return mixed object
  */
-function scorecard_client_today_pdf($scorecard, $staffs, $tag = '')
+function scorecard_client_today_pdf($scorecard, $staffs, $client_recapitulation_today, $tag = '')
 {
-    return app_pdf('scorecard',  module_libs_path(SCORECARDS_MODULE_NAME) . 'pdf/Client_today_pdf', $scorecard, $staffs, $tag);
+    return app_pdf('scorecard',  module_libs_path(SCORECARDS_MODULE_NAME) . 'pdf/Client_today_pdf', $scorecard, $staffs, $client_recapitulation_today, $tag);
 }
 
 

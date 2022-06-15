@@ -10,21 +10,25 @@ class Client_today_pdf extends App_pdf
 
     private $scorecard_number;
 
-    public function __construct($scorecard, $staffs, $tag = '')
+    public function __construct($scorecard, $staffs, $client_recapitulation_today, $tag = '')
     {
         //$this->load_language($scorecard->clientid);
 
         $scorecard                = hooks()->apply_filters('scorecard_html_pdf_data', $scorecard);
         $GLOBALS['scorecard_client_today_pdf'] = $scorecard;
         $GLOBALS['staffs_client_today_pdf'] = $staffs;
+        $GLOBALS['client_recapitulation_today_client_today_pdf'] = $client_recapitulation_today;
 
         parent::__construct();
+        log_activity( __FILE__ .' ' . json_encode($client_recapitulation_today));
 
-        $today = date("z", time());
+        $recapitulation_date = date("z", strtotime($client_recapitulation_today['recapitulation_date']));
+        $today = isset($recapitulation_date) ? $recapitulation_date : date("z", time());
 
         $this->tag              = $tag;
         $this->scorecard        = $scorecard;
         $this->staffs           = $staffs;
+        $this->client_recapitulation_today           = $client_recapitulation_today;
         $this->scorecard_number = slug_it('scorecard-day-' . $today);
 
         $this->SetTitle($this->scorecard_number);
@@ -37,6 +41,7 @@ class Client_today_pdf extends App_pdf
             'scorecard_number' => $this->scorecard_number,
             'scorecard'        => $this->scorecard,
             'staffs'        => $this->staffs,
+            'client_recapitulation_today'        => $this->client_recapitulation_today,
         ]);
 
         return $this->build();

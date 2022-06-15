@@ -76,3 +76,4 @@ $lang['scorecards_today'] 	='Recapitulasi hari ini';
 $lang['clients_recapitulation_this_week'] 	='Recapitulasi client minggu ini';
 $lang['clients_recapitulation_today'] 	='Rekapitulasi client hari ini';
 
+$lang['recapitulation_date_select'] 	='Tanggal Recapitulasi:';

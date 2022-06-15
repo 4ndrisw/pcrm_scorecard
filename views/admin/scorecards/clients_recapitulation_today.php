@@ -6,13 +6,30 @@
             <div class="col-md-12 scorecards-today ">
                 <div class="panel_s">
                     <div class="panel-body">
+
+                         <div class="row filter-form">
+                            <?php echo form_open($this->uri->uri_string() . ($this->input->get('project_id') ? '?project_id='.$this->input->get('project_id') : ''));?>
+                            <div class="col-md-3">
+                               <?php $value = _d(date('Y-m-d')); ?>
+                               <?php echo render_date_input(
+                                  'recapitulation_date',
+                                  'recapitulation_date_select',
+                                  $value
+                               ); ?>
+                            </div>
+
+                            <div class="col-md-2  center-block">
+                                <button type="submit" class="btn btn-info btn-block filter" style="margin-top:3px;"><?php echo _l('filter'); ?></button>
+                            </div>
+                            <?php echo form_close(); ?>
+                        </div>
                     </div>
                      <?//= $scorecards ?>
                     <div class="widget" id="widget-<?php echo create_widget_id(); ?>" data-name="<?php echo _l('clients_recapitulation_today '); ?>">
                       <?php if(staff_can('view', 'scorecards') || staff_can('view_own', 'scorecards')) { ?>
                       <div class="panel_s scorecards-expiring">
                           <div class="panel-body padding-10">
-                              <p class="padding-5"><?php echo _l('clients_recapitulation_today '); ?></p>
+                              <p class="padding-5"><?php echo _l('clients_recapitulation_today ') .': ' . $client_recapitulation_today['recapitulation_date']; ?></p>
                               <hr class="hr-panel-heading-dashboard">
                               <?php if (!empty($scorecards)) { ?>
                                   <div class="table-vertical-scroll">

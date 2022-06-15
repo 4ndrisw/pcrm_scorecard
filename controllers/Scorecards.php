@@ -242,24 +242,22 @@ class Scorecards extends AdminController
         if (!has_permission('scorecards', '', 'view')) {
             access_denied('scorecards');
         }
-        $data['years']    = $this->tasks_model->get_distinct_tasks_years(($this->input->post('month_from') ? $this->input->post('month_from') : 'startdate'));
-
-        $task_history_filter = $this->session->userdata('task_history_filter');
-
-        if(isset($task_history_filter['member'])){
-            $staff_id = $task_history_filter['member'];
+        
+        $client_recapitulation_today['recapitulation_date'] = date('y-m-d');
+        
+        if ($this->input->post()) {
+            $input_post = $this->input->post();
+            $client_recapitulation_today = $this->input->post();
         }
 
-        $data['month'] = isset($task_history_filter['month']) ? $task_history_filter['month'] : date('m');
-        if(!is_null($this->input->post('month')) && ($data['month'] != $this->input->post('month'))){
-            $data['month'] = $this->input->post('month');
-            $task_history_filter['month'] = $this->input->post('month');
+        if(isset($client_recapitulation_today['member'])){
+            $staff_id = $client_recapitulation_today['member'];
         }
 
-        $this->session->set_userdata('task_history_filter', $task_history_filter);
-
-        $data['scorecards'] = $this->clients_recapitulation_model->get_client_recapitulation_today();
-        $data['staffs'] = $this->clients_recapitulation_model->get_staff_grouped_today();
+        $this->session->set_userdata('client_recapitulation_today', $client_recapitulation_today);
+        $data['client_recapitulation_today'] = $client_recapitulation_today;
+        $data['scorecards'] = $this->clients_recapitulation_model->get_client_recapitulation_today($client_recapitulation_today['recapitulation_date']);
+        $data['staffs'] = $this->clients_recapitulation_model->get_staff_grouped_today($client_recapitulation_today['recapitulation_date']);
         
         $data['title']                 = _l('scorecards_today');
         $this->load->view('admin/scorecards/clients_recapitulation_today', $data);
@@ -359,11 +357,15 @@ class Scorecards extends AdminController
     public function client_today( )
     {
 
+        $client_recapitulation_today = $this->session->userdata('client_recapitulation_today');
+
+        log_activity('client_today '. json_encode($client_recapitulation_today));
+
         $today_number = date("z", time());
         $month_number = date("m", time());
 
-        $scorecard        = $this->clients_recapitulation_model->get_client_recapitulation_today();
-        $staffs        = $this->clients_recapitulation_model->get_staff_grouped_today();
+        $scorecard        = $this->clients_recapitulation_model->get_client_recapitulation_today($client_recapitulation_today['recapitulation_date']);
+        $staffs        = $this->clients_recapitulation_model->get_staff_grouped_today($client_recapitulation_today['recapitulation_date']);
         
         /*
         $scorecard->assigned_path = FCPATH . get_scorecard_upload_path('scorecard').$scorecard->id.'/assigned-'.$scorecard_number.'.png';
@@ -373,7 +375,7 @@ class Scorecards extends AdminController
         */
 
         try {
-            $pdf = scorecard_client_today_pdf($scorecard, $staffs);
+            $pdf = scorecard_client_today_pdf($scorecard, $staffs, $client_recapitulation_today);
         } catch (Exception $e) {
             $message = $e->getMessage();
             echo $message;
