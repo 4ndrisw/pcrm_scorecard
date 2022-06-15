@@ -90,7 +90,7 @@
         $this->db->join(db_prefix() . 'scorecards_tasks_history', db_prefix() . 'scorecards_tasks_history.task_id = ' . db_prefix() . 'tasks.id', 'LEFT');
     
         $this->db->group_by(['company',db_prefix().'projects.name',db_prefix().'tags.name',db_prefix().'staff.firstname',db_prefix().'staff.lastname']);
-        $this->db->where(db_prefix() . 'projects.status !=', '4');
+        //$this->db->where(db_prefix() . 'projects.status !=', '4');
 
         $this->db->where('DATE('.db_prefix() . 'scorecards_tasks_history.dateadded) =', $today);
 
