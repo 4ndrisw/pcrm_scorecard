@@ -740,7 +740,7 @@ function scorecards_daily_report($scorecards, $staff){
             if($company_buffer == $scorecard_staff->company){
                 $message .= 
                     "- Peralatan : ". $scorecard_staff->tag_name ."\r\n".
-                    "-- Task :". $scorecard_staff->task ."\r\n".
+                    //"-- Task :". $scorecard_staff->task ."\r\n".
                     "-- Report :". $scorecard_staff->task_status_4 ."\r\n".
                     "-- License :". $scorecard_staff->task_status_3 ."\r\n".
                     "-- PDF :". $scorecard_staff->task_status_2 ."\r\n".
@@ -754,7 +754,7 @@ function scorecards_daily_report($scorecards, $staff){
                     "=========================" ."\r\n".
 
                     "- Peralatan : ". $scorecard_staff->tag_name ."\r\n".
-                    "-- Task :". $scorecard_staff->task ."\r\n".
+                    //"-- Task :". $scorecard_staff->task ."\r\n".
                     "-- Report :". $scorecard_staff->task_status_4 ."\r\n".
                     "-- License :". $scorecard_staff->task_status_3 ."\r\n".
                     "-- PDF :". $scorecard_staff->task_status_2 ."\r\n".
