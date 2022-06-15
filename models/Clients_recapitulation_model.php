@@ -210,9 +210,9 @@
      */
     public function get_staff_grouped_today($days = 1)
     {
-        $diff1 = date('Y-m-d', strtotime('-' . $days . ' days'));
-        $diff2 = date('Y-m-d', strtotime('+' . 1 . ' days'));
 
+        $today = date('Y-m-d', time());
+        
         $this->db->select([
            'CONCAT(' .db_prefix().'staff.firstname," ", ' . db_prefix().'staff.lastname) AS "staff_name"',
         ]);
@@ -225,8 +225,7 @@
         $this->db->group_by([db_prefix().'staff.firstname',db_prefix().'staff.lastname']);
         $this->db->where(db_prefix() . 'projects.status !=', '4');
 
-        $this->db->where(db_prefix() . 'scorecards_tasks_history.dateadded >=', $diff1);
-        $this->db->where(db_prefix() . 'scorecards_tasks_history.dateadded <=', $diff2);
+        $this->db->where('DATE('.db_prefix() . 'scorecards_tasks_history.dateadded) =', $today);
 
         $this->db->order_by('staff_name', 'ASC');
 
