@@ -104,6 +104,7 @@
                         <?php 
                             foreach($staffs as $staff){
                                 $message = scorecards_daily_report($scorecards, $staff);
+                                $message = str_replace("\r\n", "<br />", $message);
                                 echo $message;
                             }
                         ?>
