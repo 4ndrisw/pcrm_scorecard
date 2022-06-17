@@ -758,7 +758,7 @@ function scorecards_daily_report($scorecards, $staff){
                 $uncomplete_project_task = client_uncomplete_task($scorecard_staff->project_id);
                 $message .= 
                     "- Client :". $scorecard_staff->company ."\r\n".
-                    "- Project :". $scorecard_staff->project_id .'-'.$scorecard_staff->project_name ."\r\n".
+                    "- Project :". $scorecard_staff->project_name ."\r\n".
                     "- Start date : ". $scorecard_staff->start_date."\r\n".
                     "- Total Task :" . $uncomplete_project_task[0]->total_tasks."\r\n".
                     "- Uncomplete Task :" . $uncomplete_project_task[0]->uncomplete_tasks."\r\n".
