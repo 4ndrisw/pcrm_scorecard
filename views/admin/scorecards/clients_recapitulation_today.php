@@ -56,7 +56,7 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    
                                       <table id="widget-<?php echo create_widget_id(); ?>" class="table dt-table" data-order-col="2" data-order-type="desc">
                                           <thead>
                                               <tr>
@@ -106,7 +106,7 @@
                               <?php } else { ?>
                                   <div class="text-center padding-5">
                                       <i class="fa fa-check fa-5x" aria-hidden="true"></i>
-                                      <h4><?php echo _l('no_tasks_duration_by_staff',["2"]) ; ?> </h4>
+                                      <h4><?php echo _l('no_tasks_history_by_staff',["2"]) ; ?> </h4>
                                   </div>
                               <?php } ?>
                           </div>

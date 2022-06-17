@@ -723,6 +723,14 @@ function scorecard_app_client_includes()
     echo '<script src="' . module_dir_url('' .SCORECARDS_MODULE_NAME. '', 'assets/js/scorecards.js') . '"></script>';
 }
 
+function client_uncomplete_task($project_id){
+
+    $CI = &get_instance();
+    $CI->load->model('clients_recapitulation_model');
+
+    $uncomplete_task = $CI->clients_recapitulation_model->get_client_uncomplete_task($project_id);
+    return $uncomplete_task;
+}
 
 function scorecards_daily_report($scorecards, $staff){
     $today = date("z", time());
@@ -732,7 +740,7 @@ function scorecards_daily_report($scorecards, $staff){
     $message = "";
     $message .= $staff->staff_name ."\r\n";
     $message .= slug_it('scorecard-day-' . $today)  ."\r\n";
-
+    
     foreach($scorecard_staffs as $scorecard_staff){
 
         if($scorecard_staff->staff_name == $staff->staff_name){
@@ -747,10 +755,17 @@ function scorecards_daily_report($scorecards, $staff){
                     "-- Complete :". $scorecard_staff->task_status_5 ."\r\n".
                     "--------------------------------------" ."\r\n";
             }else{
+                $uncomplete_project_task = client_uncomplete_task($scorecard_staff->project_id);
                 $message .= 
-                    "Client :" . $scorecard_staff->company ."\r\n".
-                    "Project :". $scorecard_staff->project_name ."\r\n".
-                    "start date : ". $scorecard_staff->start_date."\r\n".
+                    "- Client :". $scorecard_staff->company ."\r\n".
+                    "- Project :". $scorecard_staff->project_id .'-'.$scorecard_staff->project_name ."\r\n".
+                    "- Start date : ". $scorecard_staff->start_date."\r\n".
+                    "- Total Task :" . $uncomplete_project_task[0]->total_tasks."\r\n".
+                    "- Uncomplete Task :" . $uncomplete_project_task[0]->uncomplete_tasks."\r\n".
+                    "- Report :". $uncomplete_project_task[0]->task_status_4 ."\r\n".
+                    "- License :". $uncomplete_project_task[0]->task_status_3 ."\r\n".
+                    "- PDF :". $uncomplete_project_task[0]->task_status_2 ."\r\n".
+                    "- Complete :". $uncomplete_project_task[0]->task_status_5 ."\r\n".
                     "=========================" ."\r\n".
 
                     "- Peralatan : ". $scorecard_staff->tag_name ."\r\n".

@@ -77,3 +77,4 @@ $lang['clients_recapitulation_this_week'] 	='Recapitulasi client minggu ini';
 $lang['clients_recapitulation_today'] 	='Rekapitulasi client hari ini';
 
 $lang['recapitulation_date_select'] 	='Tanggal Recapitulasi:';
+$lang['no_tasks_history_by_staff'] 	='Tidak ada tasks history dari staff';

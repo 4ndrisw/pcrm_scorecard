@@ -243,7 +243,7 @@ class Scorecards extends AdminController
             access_denied('scorecards');
         }
         
-        $client_recapitulation_today['recapitulation_date'] = date('y-m-d');
+        $client_recapitulation_today['recapitulation_date'] = date('Y-m-d');
         
         if ($this->input->post()) {
             $input_post = $this->input->post();
