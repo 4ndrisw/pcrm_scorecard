@@ -167,7 +167,7 @@
         $this->db->join(db_prefix() . 'tags', db_prefix() . 'tags.id = ' . db_prefix() . 'taggables.tag_id', 'LEFT');
 
         $this->db->group_by([db_prefix().'clients.company', 'project_id', db_prefix().'projects.name',db_prefix().'tags.name','staff','date_added']);
-        $this->db->order_by('date_added, staff', 'DESC');
+        $this->db->order_by('date_added, staff, company', 'DESC');
 
         $this->db->where('DATE('.db_prefix() . 'scorecards_tasks_history.dateadded) =', $today);
         
