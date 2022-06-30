@@ -57,8 +57,8 @@
                                                   <th><?php echo 'L'; ?></th>
                                                   <th><?php echo 'P'; ?></th>
                                                   <th><?php echo 'C'; ?></th>
-                                                  <th><?php echo _l('proposed_date'); ?></th>
-                                                  <th><?php echo _l('released_date'); ?></th>
+                                                  <th><?php echo _l('licences_proposed'); ?></th>
+                                                  <th><?php echo _l('licences_released'); ?></th>
                                                   <th><?php echo _l('jobreport_date'); ?></th>
                                                   
                                               </tr>
