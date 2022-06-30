@@ -83,8 +83,8 @@
                                                       <td><?php echo $scorecard->task_status_3; ?> </td>
                                                       <td><?php echo $scorecard->task_status_2; ?> </td>
                                                       <td><?php echo $scorecard->task_status_5; ?> </td>
-                                                      <td><?php echo $scorecard->proposed_date; ?> </td>
-                                                      <td><?php echo $scorecard->released_date; ?> </td>
+                                                      <td><?php echo _d($scorecard->proposed_date); ?> </td>
+                                                      <td><?php echo _d($scorecard->released_date); ?> </td>
 
                                                   </tr>
                                               <?php $i++; ?>
