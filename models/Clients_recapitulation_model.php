@@ -214,7 +214,6 @@
            'count(' . db_prefix() . 'licence_items.task_id) AS `proposed`',
            db_prefix() . 'licences.proposed_date AS proposed_date',
            db_prefix() . 'licences.released_date AS released_date',
-           db_prefix() . 'jobreports.date AS jobreport_date',
             ]);
 
         $this->db->join(db_prefix() . 'task_assigned',db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'scorecards_tasks_history.task_id');
