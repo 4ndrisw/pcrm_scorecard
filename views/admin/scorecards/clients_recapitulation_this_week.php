@@ -59,6 +59,7 @@
                                                   <th><?php echo 'C'; ?></th>
                                                   <th><?php echo _l('proposed_date'); ?></th>
                                                   <th><?php echo _l('released_date'); ?></th>
+                                                  <th><?php echo _l('jobreport_date'); ?></th>
                                                   
                                               </tr>
                                           </thead>
@@ -85,6 +86,7 @@
                                                       <td><?php echo $scorecard->task_status_5; ?> </td>
                                                       <td><?php echo _d($scorecard->proposed_date); ?> </td>
                                                       <td><?php echo _d($scorecard->released_date); ?> </td>
+                                                      <td><?php echo _d($scorecard->jobreport_date); ?> </td>
 
                                                   </tr>
                                               <?php $i++; ?>
