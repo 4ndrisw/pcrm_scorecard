@@ -217,9 +217,6 @@
            db_prefix() . 'jobreports.date AS jobreport_date',
             ]);
 
-        $this->db->group_by([db_prefix().'clients.company',db_prefix().'projects.name',db_prefix().'tags.name','staff','date_added']);
-        $this->db->order_by('date_added, staff', 'DESC');
-
         $this->db->join(db_prefix() . 'task_assigned',db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'scorecards_tasks_history.task_id');
         $this->db->join(db_prefix() . 'staff',db_prefix() . 'task_assigned.staffid = ' . db_prefix() . 'staff.staffid');
         $this->db->join(db_prefix() . 'tasks', db_prefix() . 'scorecards_tasks_history.task_id = ' . db_prefix() . 'tasks.id', 'LEFT');
@@ -236,6 +233,9 @@
         
         $this->db->where(db_prefix() . 'scorecards_tasks_history.dateadded >=', $diff1);
         $this->db->where(db_prefix() . 'scorecards_tasks_history.dateadded <=', $diff2);
+
+        $this->db->group_by([db_prefix().'licences.proposed_date', db_prefix().'licences.released_date', db_prefix().'clients.company', db_prefix().'projects.name',db_prefix().'tags.name','staff','date_added']);
+        $this->db->order_by('date_added, staff', 'DESC');
 
         $this->db->order_by('start_date', 'DESC');
 
