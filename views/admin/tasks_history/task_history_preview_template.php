@@ -75,7 +75,7 @@
                           <dt><?= _l('task_history_project_name') ?> <span class="float-right">:</span></dt><dd><?=$project->name ?></dd>
                         </dl>
                          <div class="table-responsive">
-                            <table class="table task_history-items dt-table">
+                           <table id="task_history" class="table task_history-items dt-table" data-order-col="1" data-order-type="asc">
                                <thead>
                                   <tr>
                                     <th>No</th>

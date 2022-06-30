@@ -78,3 +78,7 @@ $lang['clients_recapitulation_today'] 	='Rekapitulasi client hari ini';
 
 $lang['recapitulation_date_select'] 	='Tanggal Recapitulasi:';
 $lang['no_tasks_history_by_staff'] 	='Tidak ada tasks history dari staff';
+
+$lang['proposed_date'] 	='Suket diajukan';
+$lang['released_date'] 	='Suket terbit';
+$lang['jobreport_date'] 	='Tanggal BAPP';

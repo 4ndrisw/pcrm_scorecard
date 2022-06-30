@@ -8,7 +8,7 @@
                     <div class="panel-body">
 
                     </div>
-                     <?//= $scorecards ?>
+                     <?//= $scorecards; return; ?>
                     <div>
 
                   <div class="widget" id="widget-<?php echo create_widget_id(); ?>" data-name="<?php echo _l('clients_recapitulation_this_week '); ?>">
@@ -57,6 +57,10 @@
                                                   <th><?php echo 'L'; ?></th>
                                                   <th><?php echo 'P'; ?></th>
                                                   <th><?php echo 'C'; ?></th>
+                                                  <th><?php echo _l('proposed_date'); ?></th>
+                                                  <th><?php echo _l('released_date'); ?></th>
+                                                  <th><?php echo _l('jobreport_date'); ?></th>
+                                                  
                                               </tr>
                                           </thead>
                                           <tbody>
@@ -80,6 +84,10 @@
                                                       <td><?php echo $scorecard->task_status_3; ?> </td>
                                                       <td><?php echo $scorecard->task_status_2; ?> </td>
                                                       <td><?php echo $scorecard->task_status_5; ?> </td>
+                                                      <td><?php echo $scorecard->proposed_date; ?> </td>
+                                                      <td><?php echo $scorecard->released_date; ?> </td>
+                                                      <td><?php echo $scorecard->jobreport_date; ?> </td>
+
                                                   </tr>
                                               <?php $i++; ?>
                                               <?php } ?>

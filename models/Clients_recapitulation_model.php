@@ -210,15 +210,24 @@
            'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 4, 1, NULL )) task_status_4',
            'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 3, 1, NULL )) task_status_3',
            'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 2, 1, NULL )) task_status_2',
-           'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 5, 1, NULL )) task_status_5',  
-        ]);
+           'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 5, 1, NULL )) task_status_5',
+           'count(' . db_prefix() . 'licence_items.task_id) AS `proposed`',
+           db_prefix() . 'licences.proposed_date AS proposed_date',
+           db_prefix() . 'licences.released_date AS released_date',
+           db_prefix() . 'jobreports.date AS jobreport_date',
+            ]);
+
         $this->db->group_by([db_prefix().'clients.company',db_prefix().'projects.name',db_prefix().'tags.name','staff','date_added']);
         $this->db->order_by('date_added, staff', 'DESC');
 
         $this->db->join(db_prefix() . 'task_assigned',db_prefix() . 'task_assigned.taskid = ' . db_prefix() . 'scorecards_tasks_history.task_id');
         $this->db->join(db_prefix() . 'staff',db_prefix() . 'task_assigned.staffid = ' . db_prefix() . 'staff.staffid');
         $this->db->join(db_prefix() . 'tasks', db_prefix() . 'scorecards_tasks_history.task_id = ' . db_prefix() . 'tasks.id', 'LEFT');
-    
+        $this->db->join(db_prefix() . 'licence_items', db_prefix() . 'tasks.id = ' . db_prefix() . 'licence_items.task_id', 'left');
+        $this->db->join(db_prefix() . 'jobreport_items', db_prefix() . 'tasks.id = ' . db_prefix() . 'jobreport_items.task_id', 'left');
+        $this->db->join(db_prefix() . 'licences', db_prefix() . 'licences.id = ' . db_prefix() . 'licence_items.licence_id', 'left');
+        $this->db->join(db_prefix() . 'jobreports', db_prefix() . 'jobreports.id = ' . db_prefix() . 'jobreport_items.jobreport_id', 'left');
+
 
         $this->db->join(db_prefix() . 'projects', db_prefix() . 'projects.id = ' . db_prefix() . 'tasks.rel_id', 'LEFT');
         $this->db->join(db_prefix() . 'clients', db_prefix() . 'clients.userid = ' . db_prefix() . 'projects.clientid', 'LEFT');
