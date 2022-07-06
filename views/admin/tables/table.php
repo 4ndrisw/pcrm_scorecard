@@ -1,6 +1,7 @@
 <?php
 
 defined('BASEPATH') or exit('No direct script access allowed');
+$CI = &get_instance();
 
 $aColumns = [
     db_prefix() . 'scorecards_tasks_duration.name',
@@ -27,8 +28,8 @@ $join = [
 
 $where  = [];
 
-if($this->ci->session->has_userdata('task_duration_filter')){
-    $task_duration_filter  = $this->ci->session->userdata('task_duration_filter');
+if($CI->session->has_userdata('task_duration_filter')){
+    $task_duration_filter  = $CI->session->userdata('task_duration_filter');
     
     $staff_id = isset($task_duration_filter['member']) ? $task_duration_filter['member'] : '';
     $month = isset($task_duration_filter['month']) ? $task_duration_filter['month'] : date('m');
@@ -41,8 +42,6 @@ if(is_numeric($staff_id)){
 if(is_numeric($month)){
     array_push($where, 'AND MONTH(' . db_prefix() . 'scorecards_tasks_duration.dateadded) =' . $month);
 }
-
-log_activity('_task_duration_filter_ ' . json_encode($task_duration_filter));
 
 $additionalColumns = hooks()->apply_filters('scorecards_table_additional_columns_sql', [
     db_prefix() . 'scorecards_tasks_duration.lastname',

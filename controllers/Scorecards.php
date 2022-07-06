@@ -36,25 +36,23 @@ class Scorecards extends AdminController
             $staff_id = '';
         }
 
-        $task_duration_filter = $this->session->userdata('task_duration_filter');
-
-        log_activity('1 '. json_encode($task_duration_filter));
-
-        if(isset($task_duration_filter['member'])){
-            $staff_id = $task_duration_filter['member'];
-        }
-        
         $data['staff_id'] = $staff_id;
+        $task_duration_filter['staff_id'] = $staff_id;
 
-        if(!is_null($this->input->post('member')) && ($task_duration_filter['member'] != $this->input->post('member'))){
-            $data['staff_id'] = $this->input->post('member');
-            $task_duration_filter['member'] = $this->input->post('member');
+        if(!is_null($this->input->post('member'))){
+            $data['staff_id'] = $task_duration_filter['member'] = $this->input->post('member');
         }
 
-        $data['month'] = isset($task_duration_filter['month']) ? $task_duration_filter['month'] : date('m');
-        if(!is_null($this->input->post('month')) && ($data['month'] != $this->input->post('month'))){
-            $data['month'] = $this->input->post('month');
-            $task_duration_filter['month'] = $this->input->post('month');
+        $data['month'] = $task_duration_filter['month'] = date('m');
+
+        if(!is_null($this->input->post('month'))){
+            $data['month'] = $task_duration_filter['month'] = $this->input->post('month');
+        }
+
+        $data['year'] = $task_duration_filter['year'] = date('Y');
+
+        if(!is_null($this->input->post('year'))){
+            $data['year'] = $task_duration_filter['year'] = $this->input->post('year');
         }
 
         $this->session->set_userdata('task_duration_filter', $task_duration_filter);
