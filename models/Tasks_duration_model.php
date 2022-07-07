@@ -126,7 +126,7 @@ class Tasks_duration_model extends App_Model
         $this->db->where(db_prefix() .'tasks.rel_id IS NOT NULL');
         $this->db->where(db_prefix() .'tasks.rel_type ="project"');
         
-        $this->db->limit(3, 0);
+        $this->db->limit(30, 0);
 
         $tasks = $this->db->get(db_prefix() . 'tasks')->result_array();
 
@@ -135,9 +135,9 @@ class Tasks_duration_model extends App_Model
 
     public function get_average_task_duration_by_staff($staffid = ''){
 
-        $this->db->select(['staff_id', 'firstname']);
+        $this->db->select(['staffid', 'firstname']);
         $this->db->select('AVG(`duration`) As avg_duration',FALSE);
-        $this->db->group_by(['staff_id', 'firstname']); 
+        $this->db->group_by(['staffid', 'firstname']); 
         $this->db->order_by('avg_duration', 'DESC'); 
 
         $tasks = $this->db->get(db_prefix() . 'scorecards_tasks_duration')->result_array();
@@ -146,9 +146,9 @@ class Tasks_duration_model extends App_Model
     }
     public function get_maximum_task_duration_by_staff($staffid = ''){
 
-        $this->db->select(['staff_id', 'firstname']);
+        $this->db->select(['staffid', 'firstname']);
         $this->db->select('MAX(`duration`) As max_duration',FALSE);
-        $this->db->group_by(['staff_id', 'firstname']); 
+        $this->db->group_by(['staffid', 'firstname']); 
         $this->db->order_by('max_duration', 'DESC'); 
 
         $tasks = $this->db->get(db_prefix() . 'scorecards_tasks_duration')->result_array();
@@ -158,9 +158,9 @@ class Tasks_duration_model extends App_Model
 
     public function get_count_tasks_by_duration_per_staff($staffid = ''){
 
-        $this->db->select(['staff_id', 'firstname', 'duration']);
+        $this->db->select(['staffid', 'firstname', 'duration']);
         $this->db->select('COUNT(`duration`) As count_duration',FALSE);
-        $this->db->group_by(['duration','staff_id','firstname']); 
+        $this->db->group_by(['duration','staffid','firstname']); 
         $this->db->order_by('duration', 'DESC'); 
 
         //return $this->db->get_compiled_select(db_prefix() . 'scorecards_task_duration');
@@ -173,9 +173,9 @@ class Tasks_duration_model extends App_Model
     public function get_daily_completed_task_by_staff($staffid = ''){
 
         $this->db->select('COUNT(`id`) As count_id',FALSE);
-        $this->db->select(['staff_id', 'firstname']);
+        $this->db->select(['staffid', 'firstname']);
         $this->db->select('DATE(`datefinished`) As date_finished',FALSE);
-        $this->db->group_by(['date_finished','staff_id','firstname']); 
+        $this->db->group_by(['date_finished','staffid','firstname']); 
         $this->db->order_by('date_finished', 'DESC'); 
 
         //return $this->db->get_compiled_select(db_prefix() . 'scorecards_task_duration');
