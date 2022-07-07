@@ -234,6 +234,21 @@
         $this->db->where(db_prefix() . 'scorecards_tasks_history.dateadded >=', $diff1);
         $this->db->where(db_prefix() . 'scorecards_tasks_history.dateadded <=', $diff2);
 
+        $this->db->or_group_start()
+            ->where(db_prefix() . 'licences.proposed_date >=', $diff1)
+            ->where(db_prefix() . 'licences.proposed_date <=', $diff2)
+            ->group_end();
+
+        $this->db->or_group_start()
+            ->where(db_prefix() . 'licences.released_date >=', $diff1)
+            ->where(db_prefix() . 'licences.released_date <=', $diff2)
+            ->group_end();
+
+        $this->db->or_group_start()
+            ->where(db_prefix() . 'jobreports.date >=', $diff1)
+            ->where(db_prefix() . 'jobreports.date <=', $diff2)
+            ->group_end();
+
         $this->db->group_by([db_prefix().'jobreports.date', db_prefix().'licences.proposed_date', db_prefix().'licences.released_date', db_prefix().'clients.company', db_prefix().'projects.name',db_prefix().'tags.name','staff','date_added']);
         $this->db->order_by('date_added, staff', 'DESC');
 
