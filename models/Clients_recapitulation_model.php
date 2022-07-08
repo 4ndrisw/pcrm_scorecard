@@ -205,7 +205,7 @@
            'CONCAT(' .db_prefix().'staff.firstname," ", ' . db_prefix().'staff.lastname) AS "staff_name"',
            db_prefix().'projects.start_date',
            db_prefix().'tags.name AS tag_name',
-           'count('. db_prefix().'tasks.name) AS `task`','DATE('.db_prefix() . 'scorecards_tasks_history.dateadded) AS date_added', 'CONCAT(firstname," ",lastname) AS staff', 
+           'DATE('.db_prefix() . 'scorecards_tasks_history.dateadded) AS date_added', 'CONCAT(firstname," ",lastname) AS staff', 
            'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 1, 1, NULL )) task_status_1',
            'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 4, 1, NULL )) task_status_4',
            'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 3, 1, NULL )) task_status_3',
@@ -252,7 +252,7 @@
         $this->db->group_by([db_prefix().'jobreports.date', db_prefix().'licences.proposed_date', db_prefix().'licences.released_date', db_prefix().'clients.company', db_prefix().'projects.name',db_prefix().'tags.name','staff','date_added']);
         $this->db->order_by('date_added, staff', 'DESC');
 
-        $this->db->order_by('start_date', 'DESC');
+        //$this->db->order_by('start_date', 'DESC');
 
         //return $this->db->get_compiled_select(db_prefix() . 'scorecards_tasks_history');
 

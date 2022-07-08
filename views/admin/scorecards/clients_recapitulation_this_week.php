@@ -50,8 +50,7 @@
                                                   <th><?php echo _l('client'); ?></th>
                                                   <th><?php echo _l('staff'); ?></th>
                                                   <th><?php echo _l('equipment'); ?></th>
-                                                  <th><?php echo _l('tasks'); ?></th>
-
+                                                 
                                                   <th><?php echo 'N'; ?></th>
                                                   <th><?php echo 'R'; ?></th>
                                                   <th><?php echo 'L'; ?></th>
@@ -67,7 +66,7 @@
                                               <?php $i = 1; ?>
                                               <?php foreach ($scorecards as $scorecard) { ?>
                                                 <?php $task_status = 'status_task_uncomplete'; ?>
-                                                <?php if($scorecard->task == $scorecard->task_status_5){$task_status = 'status_task_complete';} ?>
+                                                <?php //if($scorecard->task == $scorecard->task_status_5){$task_status = 'status_task_complete';} ?>
                                                   <tr class="<?= $task_status?>">
                                                       <td> <?php echo $i; ?></td>
                                                       <td>
@@ -77,8 +76,7 @@
                                                       </td>
                                                       <td><?php echo $scorecard->staff_name; ?> </td>
                                                       <td><?php echo $scorecard->tag_name; ?> </td>
-                                                      <td><?php echo $scorecard->task; ?> </td>
-
+                                                      
                                                       <td><?php echo $scorecard->task_status_1; ?> </td>
                                                       <td><?php echo $scorecard->task_status_4; ?> </td>
                                                       <td><?php echo $scorecard->task_status_3; ?> </td>
