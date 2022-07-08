@@ -35,7 +35,7 @@ foreach($staffs as $staff){
         $tbl_po = '
             <table style="border: solid 1px #555; width: 100%;">
                 <tr style="border: solid 1px #555; background-color:#0b1861;color:#f3f3f3;">
-                    <th style="width:300";>Customer</th>
+                    <th style="width:400";>Customer</th>
                     <th>Equipment</th>
                     <th style="width:50";>R</th>
                     <th style="width:50";>L</th>
