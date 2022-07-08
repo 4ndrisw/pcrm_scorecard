@@ -205,7 +205,7 @@
            'CONCAT(' .db_prefix().'staff.firstname," ", ' . db_prefix().'staff.lastname) AS "staff_name"',
            db_prefix().'projects.start_date',
            db_prefix().'tags.name AS tag_name',
-           'COUNT('. db_prefix().'tags.name) AS count_task',
+           'COUNT('. db_prefix().'tasks.id) AS count_task',
            'CONCAT(firstname," ",lastname) AS staff', 
            'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 1, 1, NULL )) task_status_1',
            'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 4, 1, NULL )) task_status_4',
