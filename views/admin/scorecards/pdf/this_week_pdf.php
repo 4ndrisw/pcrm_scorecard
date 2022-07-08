@@ -49,7 +49,7 @@ foreach($staffs as $staff){
 
                         $pdf->writeHTML($html_table, true, 0, true, 0);
 
-                        $tbl_po .= '<tr style="border: solid 1px #555;"><td style="border: solid 1px #555;">'. $scorecard_staff->company .'<div class="">'. $scorecard_staff->project_name. '</div>'. $scorecard_staff->start_date.'</td><td style="border: solid 1px #555;">'. $scorecard_staff->tag_name .'</td><td style="border: solid 1px #555;">'. $scorecard_staff->task_status_4 .'</td><td style="border: solid 1px #555;">'. $scorecard_staff->task_status_3 .'</td><td style="border: solid 1px #555;">'. $scorecard_staff->task_status_2 .'</td><td style="border: solid 1px #555;">'. $scorecard_staff->task_status_5 .'</td></tr>';
+                        $tbl_po .= '<tr style="border: solid 1px #555;"><td style="border: solid 1px #555;">'. $scorecard_staff->company .'<div class="">'. $scorecard_staff->project_name.'<span> #'. $scorecard_staff->start_date.'</span>'.'</div></td><td style="border: solid 1px #555;">'. $scorecard_staff->tag_name .'</td><td style="border: solid 1px #555;">'. $scorecard_staff->task_status_4 .'</td><td style="border: solid 1px #555;">'. $scorecard_staff->task_status_3 .'</td><td style="border: solid 1px #555;">'. $scorecard_staff->task_status_2 .'</td><td style="border: solid 1px #555;">'. $scorecard_staff->task_status_5 .'</td></tr>';
                     }
 
                     $i++;
