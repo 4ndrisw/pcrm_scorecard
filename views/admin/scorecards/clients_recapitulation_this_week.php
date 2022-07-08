@@ -43,7 +43,7 @@
                                         </div>
                                     </div>
 
-                                      <table id="widget-<?php echo create_widget_id(); ?>" class="table dt-table" data-order-col="4" data-order-type="desc">
+                                      <table id="widget-<?php echo create_widget_id(); ?>" class="table dt-table" data-order-col="1" data-order-type="desc">
                                           <thead>
                                               <tr>
                                                   <th>No.</th>
