@@ -7,9 +7,25 @@
                 <div class="panel_s">
                     <div class="panel-body">
 
-                    </div>
-                     <?//= $scorecards; return; ?>
-                    <div>
+                        <div class="row">
+                            <?php
+                            echo form_open($this->uri->uri_string(),array('id'=>'clients-recapitulation-this-week-form','class'=>'_transaction_form'));
+                            ?>
+                           <div class="col-md-5">
+                              <?php $value = (isset($schedule) ? _d($schedule->date) : _d(date('Y-m-d'))); ?>
+                              <?php echo render_date_input('start_date','schedule_add_edit_date',$value); ?>
+                           </div>
+
+                           <div class="col-md-5">
+                              <?php $value = (isset($schedule) ? _d($schedule->date) : _d(date('Y-m-d'))); ?>
+                              <?php echo render_date_input('end_date','schedule_add_edit_date',$value); ?>
+                           </div>
+                           <div class="col-md-5">
+                              <button type="button" class="btn-tr btn btn-info clients-recapitulation-this-week-form-submit transaction-submit">Filter</button>
+                           </div>
+
+                            <?php echo form_close(); ?>
+                        </div>
 
                   <div class="widget" id="widget-<?php echo create_widget_id(); ?>" data-name="<?php echo _l('clients_recapitulation_this_week '); ?>">
                       <?php if(staff_can('view', 'scorecards') || staff_can('view_own', 'scorecards')) { ?>
