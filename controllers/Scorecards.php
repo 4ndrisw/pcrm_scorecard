@@ -7,6 +7,7 @@ class Scorecards extends AdminController
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('company_recapitulation_model');
         $this->load->model('clients_recapitulation_model');
         $this->load->model('tasks_duration_model');
         $this->load->model('tasks_model');
@@ -206,6 +207,38 @@ class Scorecards extends AdminController
         $this->load->view('admin/scorecards/task_recapitulation', $data);
     }
 
+    /* Get all scorecards in case user go on index page */
+    public function company_recapitulation($id = '')
+    {
+        if (!has_permission('scorecards', '', 'view')) {
+            access_denied('scorecards');
+        }
+        $data['years']    = $this->tasks_model->get_distinct_tasks_years(($this->input->post('month_from') ? $this->input->post('month_from') : 'startdate'));
+
+        $task_history_filter = $this->session->userdata('task_history_filter');
+
+        if(isset($task_history_filter['member'])){
+            $staff_id = $task_history_filter['member'];
+        }
+
+        $data['month'] = isset($task_history_filter['month']) ? $task_history_filter['month'] : date('m');
+        if(!is_null($this->input->post('month')) && ($data['month'] != $this->input->post('month'))){
+            $data['month'] = $this->input->post('month');
+            $task_history_filter['month'] = $this->input->post('month');
+        }
+
+        $this->session->set_userdata('task_history_filter', $task_history_filter);
+
+        $data['atd'] = $this->company_recapitulation_model->get_average_tasks_duration();
+        $data['mtd'] = $this->company_recapitulation_model->get_maximum_tasks_duration();
+        $data['ctd'] = $this->company_recapitulation_model->get_count_tasks_by_duration();
+
+
+                
+        $data['title']                 = _l('scorecards_company_recapitulation');
+        $this->load->view('admin/scorecards/company_recapitulation', $data);
+    }
+    
     /* Get all scorecards in case user go on index page */
     public function clients_recapitulation($id = '')
     {
