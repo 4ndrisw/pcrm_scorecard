@@ -257,7 +257,7 @@
             ->where(db_prefix() . 'jobreports.date <=', $diff2)
             ->group_end();
 
-        $this->db->group_by([db_prefix().'jobreports.date', db_prefix().'licences.proposed_date', db_prefix().'licences.released_date', db_prefix().'clients.company', db_prefix().'projects.name',db_prefix().'tags.name','staff']);
+        $this->db->group_by([db_prefix().'inspections.date', db_prefix().'jobreports.date', db_prefix().'licences.proposed_date', db_prefix().'licences.released_date', db_prefix().'clients.company', db_prefix().'projects.name',db_prefix().'tags.name','staff']);
         $this->db->order_by('company, staff', 'DESC');
 
         //$this->db->order_by('start_date', 'DESC');
