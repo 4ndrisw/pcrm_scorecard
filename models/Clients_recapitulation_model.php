@@ -212,6 +212,7 @@
            'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 2, 1, NULL )) task_status_2',
            'COUNT(IF(  '.db_prefix().'scorecards_tasks_history.status = 5, 1, NULL )) task_status_5',
            'count(' . db_prefix() . 'licence_items.task_id) AS `proposed`',
+           db_prefix() . 'inspections.date AS inspection_date',
            db_prefix() . 'licences.proposed_date AS proposed_date',
            db_prefix() . 'licences.released_date AS released_date',
            db_prefix() . 'jobreports.date AS jobreport_date',
@@ -222,8 +223,10 @@
         $this->db->join(db_prefix() . 'tasks', db_prefix() . 'scorecards_tasks_history.task_id = ' . db_prefix() . 'tasks.id', 'LEFT');
         $this->db->join(db_prefix() . 'licence_items', db_prefix() . 'tasks.id = ' . db_prefix() . 'licence_items.task_id', 'left');
         $this->db->join(db_prefix() . 'jobreport_items', db_prefix() . 'tasks.id = ' . db_prefix() . 'jobreport_items.task_id', 'left');
+        $this->db->join(db_prefix() . 'inspection_items', db_prefix() . 'tasks.id = ' . db_prefix() . 'inspection_items.task_id', 'left');
         $this->db->join(db_prefix() . 'licences', db_prefix() . 'licences.id = ' . db_prefix() . 'licence_items.licence_id', 'left');
         $this->db->join(db_prefix() . 'jobreports', db_prefix() . 'jobreports.id = ' . db_prefix() . 'jobreport_items.jobreport_id', 'left');
+        $this->db->join(db_prefix() . 'inspections', db_prefix() . 'inspections.id = ' . db_prefix() . 'inspection_items.inspection_id', 'left');
 
 
         $this->db->join(db_prefix() . 'projects', db_prefix() . 'projects.id = ' . db_prefix() . 'tasks.rel_id', 'LEFT');
@@ -233,6 +236,11 @@
         
         $this->db->where(db_prefix() . 'scorecards_tasks_history.dateadded >=', $diff1);
         $this->db->where(db_prefix() . 'scorecards_tasks_history.dateadded <=', $diff2);
+
+        $this->db->or_group_start()
+            ->where(db_prefix() . 'inspections.date >=', $diff1)
+            ->where(db_prefix() . 'inspections.date <=', $diff2)
+            ->group_end();
 
         $this->db->or_group_start()
             ->where(db_prefix() . 'licences.proposed_date >=', $diff1)

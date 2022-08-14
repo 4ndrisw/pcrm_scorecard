@@ -72,6 +72,7 @@
                                                   <th><?php echo 'L'; ?></th>
                                                   <th><?php echo 'P'; ?></th>
                                                   <th><?php echo 'C'; ?></th>
+                                                  <th><?php echo _l('inspection_date'); ?></th>
                                                   <th><?php echo _l('licences_proposed'); ?></th>
                                                   <th><?php echo _l('licences_released'); ?></th>
                                                   <th><?php echo _l('jobreport_date'); ?></th>
@@ -97,6 +98,7 @@
                                                       <td><?php echo $scorecard->task_status_3; ?> </td>
                                                       <td><?php echo $scorecard->task_status_2; ?> </td>
                                                       <td><?php echo $scorecard->task_status_5; ?> </td>
+                                                      <td><?php echo _d($scorecard->inspection_date); ?> </td>
                                                       <td><?php echo _d($scorecard->proposed_date); ?> </td>
                                                       <td><?php echo _d($scorecard->released_date); ?> </td>
                                                       <td><?php echo _d($scorecard->jobreport_date); ?> </td>
