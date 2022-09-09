@@ -68,6 +68,7 @@ $lang['clients_recapitulation'] 	='Clients recapitulation';
 $lang['start_date'] 	='Tanggal';
 $lang['equipment'] 	='Equipment';
 $lang['scorecards_this_week'] 	='Recapitulation this week';
+$lang['scorecards_week'] 	='Recapitulation week';
 $lang['scorecards_today'] 	='Recapitulation today';
 
 $lang['scorecard_pdf_heading'] 	='Scorecard this week';

@@ -318,8 +318,8 @@ class Scorecards extends AdminController
         $this->session->set_userdata('task_history_filter', $task_history_filter);
 
         $data['scorecards'] = $this->clients_recapitulation_model->get_client_recapitulation_this_week();
-                
-        $data['title']                 = _l('scorecards_this_week');
+        
+        $data['title']                 = _l('scorecards_week') . ' - '. date("W", time()); 
         $this->load->view('admin/scorecards/clients_recapitulation_this_week', $data);
     }
 

@@ -70,8 +70,9 @@ $lang['equipment'] 	='Equipment';
 $lang['scorecard_pdf_heading'] 	='Scorecard minggu ini';
 $lang['scorecard_client_today_pdf_heading'] 	='Scorecard hari ini';
 
-$lang['scorecards_this_week'] 	='Recapitulasi minggu ini';
-$lang['scorecards_today'] 	='Recapitulasi hari ini';
+$lang['scorecards_this_week'] 	='Rekapitulasi minggu ini';
+$lang['scorecards_today'] 	='Rekapitulasi hari ini';
+$lang['scorecards_week'] 	='Rekapitulasi minggu ke';
 
 $lang['clients_recapitulation_this_week'] 	='Recapitulasi client minggu ini';
 $lang['clients_recapitulation_today'] 	='Rekapitulasi client hari ini';
